@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+	BrowserRouter,
+} from 'react-router-dom';
+import { Header } from './components/Header/Header.js';
+import { Main } from './pages/Main/Main.js';
+import { UserProfile } from './pages/UserProfile/UserProfile.js';
+import { Report } from './pages/Report/Report.js';
+import { Verification } from './pages/Verification/Verification.js';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Router>
+				<div>
+					<Header />
+					<Switch>
+						<Route exact path='/'>
+							<Redirect to='/main' />
+						</Route>
+						<Route path='/main' component={Main} />
+						<Route path='/profile' component={UserProfile} />
+						<Route path='/report' component={Report} />
+						<Route path='/check' component={Verification} />
+					</Switch>
+				</div>
+			</Router>
+		</BrowserRouter>
+	);
 }
 
 export default App;

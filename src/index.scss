@@ -1,0 +1,60 @@
+@import './assets/styles/_variables';
+@import './assets/styles/_reset';
+@import './assets/styles/_mixins';
+@import './assets/styles/_fonts';
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-family: Mazzard, Arial, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #F1F2F8;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+
+
+
+
+// Components
+@import './components/Header/Header.scss';
+@import './pages/Verification/Verification.scss';
+
+@import './components/SearchBar/SearchBar.scss';
+
+@import './pages/Main/Main.scss';
+@import './pages/Report/Report.scss';
+@import './pages/UserProfile/UserProfile.scss';
+// @import './pages/Verification/Verification.scss';
+
+
+.container {
+  width: 100%;
+  max-width: 1230px;
+  padding: 0 15px;
+  margin: 1rem auto 0 auto;
+  overflow: hidden;
+
+  // & > .search:focus-within + .verification:before,
+  // & > .search:focus-within + .report:before {
+  //   visibility: visible;
+  // }
+  // & > .search:focus-within + .verification > .verification__body >  .account > .account__img{
+  //   filter: opacity(0.56) drop-shadow(0 0 0 rgb(122, 122, 122));
+  // }
+}
+
+
+

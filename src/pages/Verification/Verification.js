@@ -1,74 +1,120 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import img from '../../assets/img/test.png';
-import { ReactComponent as PeopleIcon } from '../../assets/icons/people.svg';
-import { ReactComponent as Package } from '../../assets/icons/group.svg';
-import { ReactComponent as TrashIcon } from '../../assets/icons/trash.svg';
+import {
+	User,
+	TrashIconButton,
+	UserButtonsField,
+	UserTextInfo,
+	UserCheckingStats,
+	ReadyStatsIcon,
+	Package,
+} from '../../components/User/User.js';
 import '../../index.scss';
 
-const Profile = ({ statusField }) => {
-	return (
-		<div className='account'>
-			{/* <div className='account__item'> */}
-			<img
-				className={statusField ? 'account__img active' : 'account__img'}
-				alt='profile'
-				src={img}
-			></img>
-			{/* </div> */}
-			<div className='account__info'>
-				<div className='account__name'>Имя Пользователя</div>
-				<div className='account__url'>@instagram__account</div>
-			</div>
-			<div className='account__count'>
-				<PeopleIcon className='account__icon' />
-				<span>5 355</span>
-			</div>
-			<span className='account__status'>
-				Требуется оплата для получения полного отчета
-			</span>
-			<button>
-				<TrashIcon className='trash__icon' />
-			</button>
-			<Link className='account__btn' to='/main'>
-				<Package className='bundle__icon' />
-				Оплатить
-			</Link>
-		</div>
-	);
-};
-
-const InstagramAccounts = ({ statusField }) => {
+const InstagramAccounts = ({ statusField, data }) => {
 	return (
 		<>
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
-			<Profile statusField={statusField} />
+			<User statusField={statusField} dataFields={''}>
+				<UserTextInfo />
+				<TrashIconButton />
+				<UserButtonsField
+					textButton={'Оплатить'}
+					icon={<Package className='bundle__icon' />}
+				/>
+			</User>
+			<User statusField={statusField} dataFields={''} />
 		</>
 	);
 };
 
 function Verification() {
-	const [value, setValue] = useState('');
-	const [activeFocus, setActiveFocus] = useState(false);
+	const stateFields = {
+		value: '',
+		activeFocus: false,
+		isLoaded: false,
+		isError: false,
+	};
+
+	const [localStates, dispatch] = useReducer(reducer, stateFields);
+
+	function reducer(state, action) {
+		switch (action.type) {
+			case 'BOOLEAN_CHANGE':
+				return { ...state, [action.field]: action.payload };
+			case 'BOOLEAN_SWITCH':
+				return { ...state, [action.field]: !state[action.field] };
+			case 'HANDLE_INPUT':
+				return { ...state, [action.field]: action.payload };
+			default:
+				throw new Error();
+		}
+	}
+
+	const dispatchChange = (field, value) => {
+		dispatch({
+			type: 'BOOLEAN_CHANGE',
+			field: field,
+			payload: value,
+		});
+	};
+	const [dataUser, setDataUser] = useState({});
+
+	useEffect(() => {
+		async function fetchDataID(name) {
+			if (name === '') return;
+			dispatchChange('isLoaded', false);
+			try {
+				const response = await fetch(
+					`http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&vanityurl=${name}`
+				);
+				const responseJSON = await response.json();
+				const steamID = await responseJSON.response.steamid;
+
+				const userProfile = await fetch(
+					`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&steamids=${steamID}`
+				);
+
+				const userJSON = await userProfile.json();
+				const data = await userJSON.response.players[0];
+				if (data === undefined) return;
+				dispatchChange('isError', false);
+				dispatchChange('isLoaded', true);
+				setDataUser(data);
+			} catch (error) {
+				dispatchChange('isError', false);
+			}
+		}
+
+		fetchDataID(localStates.value);
+	}, [localStates.value]);
 
 	return (
 		<>
 			<div className='container'>
 				<SearchBar
-					value={value}
-					setValue={setValue}
-					setFocus={setActiveFocus}
+					stateFields={localStates}
+					setValue={(e) =>
+						dispatch({
+							type: 'HANDLE_INPUT',
+							field: 'value',
+							payload: e,
+						})
+					}
+					setFocus={(e) =>
+						dispatch({
+							type: 'BOOLEAN_CHANGE',
+							field: 'activeFocus',
+							payload: e,
+						})
+					}
+					data={dataUser}
 				/>
 				<div
 					className={
-						activeFocus ? 'verification active' : 'verification'
+						localStates.activeFocus || localStates.value
+							? 'verification active'
+							: 'verification'
 					}
 				>
 					<div className='verification__header'>
@@ -82,7 +128,10 @@ function Verification() {
 						</div>
 					</div>
 					<div className='verification__body'>
-						<InstagramAccounts statusField={activeFocus} />
+						<InstagramAccounts
+							statusField={localStates.activeFocus}
+							data={dataUser}
+						/>
 					</div>
 				</div>
 			</div>

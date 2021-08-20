@@ -27,7 +27,7 @@ const UserMenu = () => {
 				</div>
 				{isOpen && (
 					<div className='dropdown__body'>
-						<Link className='dropdown__item' to='/'>
+						<Link className='dropdown__item' to='/profile'>
 							<Gears className='dropdown__logo' />
 							Настройки
 						</Link>

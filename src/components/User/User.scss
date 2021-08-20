@@ -1,0 +1,125 @@
+.account {
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 0.5rem;
+  transition: all .2s linear;
+  
+  &:hover {
+    background-color: $light;
+  }
+  &:hover > .account__img {
+    transition: all .2s linear;
+  }
+  &:hover > .account__btn {
+    background-color: $brand;
+    color: $white;
+    transition: all .2s linear;
+    margin-left: 0;
+  }
+  &:hover > .account__count > .account__icon {
+    fill: $brand-light;
+    transition: all .2s linear;
+  }
+  &:hover > .account__status {
+    display: flex;
+  }
+
+  &:hover > .account__btn > .bundle__icon {
+    transition: all .2s linear;
+    stroke: $white;
+  }
+  &:hover > button > .trash__icon {
+    display: block;
+  }
+  &:hover > .account__item:before {
+    visibility: visible;
+  }
+  &:hover >  .account__img {
+    filter: opacity(0.56) drop-shadow(0 0 0 rgb(122, 122, 122));
+  }
+}
+
+.account__img {
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  transition: all .1s linear;
+
+  &.active {
+    filter: opacity(0.56) drop-shadow(0 0 0 rgb(122, 122, 122));
+  }
+}
+
+.account__count {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  position: relative;
+}
+.account__icon {
+  fill: $gray-light;
+  position: absolute;
+  top: 33%;
+  left: -20px;
+
+  transition: all .2s linear;
+
+}
+.account__info {
+  margin-left: 2rem;
+  width: 28%;
+}
+.account__status {
+  display: none;
+  align-content: center;
+  align-items: center;
+  margin: 0 auto;
+  color: $ghost;
+  width: 250px;
+  font-weight: 400;
+  font-size: 0.8rem;
+
+  position: relative;
+}
+.account__name {
+  margin-top: 0.2rem;
+  font-weight: 600;
+  color: $primary;
+}
+.account__url {
+  color: $secondary;
+  font-weight: 400;
+}
+.account__btn {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  background-color: $white;
+  color: $brand;
+  border: 1px solid $brand;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.9rem 0.7rem 3.5rem;
+  position: relative;
+  transition: all .2s linear;
+}
+
+.bundle__icon {
+  position: absolute;
+  left: 16%;
+  z-index: 11;
+  stroke: #DB84A4;
+  transition: all .2s linear;
+
+}
+
+.trash__icon {
+  display: none;
+  margin-right: 1rem;
+  fill: $ghost;
+  transition: all .1s linear;
+  &:hover {
+    fill: $secondary;
+  }
+}

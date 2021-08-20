@@ -1,28 +1,29 @@
 {
   "files": {
-    "main.css": "/checkblogger/static/css/main.d4416310.chunk.css",
-    "main.js": "/checkblogger/static/js/main.b127c0fb.chunk.js",
-    "main.js.map": "/checkblogger/static/js/main.b127c0fb.chunk.js.map",
+    "main.css": "/checkblogger/static/css/main.b7d458a7.chunk.css",
+    "main.js": "/checkblogger/static/js/main.cfa0c31a.chunk.js",
+    "main.js.map": "/checkblogger/static/js/main.cfa0c31a.chunk.js.map",
     "runtime-main.js": "/checkblogger/static/js/runtime-main.a916cd51.js",
     "runtime-main.js.map": "/checkblogger/static/js/runtime-main.a916cd51.js.map",
-    "static/js/2.d51ed9f1.chunk.js": "/checkblogger/static/js/2.d51ed9f1.chunk.js",
-    "static/js/2.d51ed9f1.chunk.js.map": "/checkblogger/static/js/2.d51ed9f1.chunk.js.map",
+    "static/js/2.1270d18b.chunk.js": "/checkblogger/static/js/2.1270d18b.chunk.js",
+    "static/js/2.1270d18b.chunk.js.map": "/checkblogger/static/js/2.1270d18b.chunk.js.map",
     "index.html": "/checkblogger/index.html",
-    "static/css/main.d4416310.chunk.css.map": "/checkblogger/static/css/main.d4416310.chunk.css.map",
-    "static/js/2.d51ed9f1.chunk.js.LICENSE.txt": "/checkblogger/static/js/2.d51ed9f1.chunk.js.LICENSE.txt",
+    "static/css/main.b7d458a7.chunk.css.map": "/checkblogger/static/css/main.b7d458a7.chunk.css.map",
+    "static/js/2.1270d18b.chunk.js.LICENSE.txt": "/checkblogger/static/js/2.1270d18b.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/checkblogger/static/media/MazzardH-SemiBold.ae8bcb42.ttf",
     "static/media/gears.f6258b35.svg": "/checkblogger/static/media/gears.f6258b35.svg",
     "static/media/group.9cf187f9.svg": "/checkblogger/static/media/group.9cf187f9.svg",
     "static/media/log-out.fd05d274.svg": "/checkblogger/static/media/log-out.fd05d274.svg",
     "static/media/logo-test.16ec11d7.svg": "/checkblogger/static/media/logo-test.16ec11d7.svg",
     "static/media/people.5f6d9864.svg": "/checkblogger/static/media/people.5f6d9864.svg",
+    "static/media/report.3d0908c5.svg": "/checkblogger/static/media/report.3d0908c5.svg",
     "static/media/search.19b172aa.svg": "/checkblogger/static/media/search.19b172aa.svg",
     "static/media/trash.616d13b2.svg": "/checkblogger/static/media/trash.616d13b2.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a916cd51.js",
-    "static/js/2.d51ed9f1.chunk.js",
-    "static/css/main.d4416310.chunk.css",
-    "static/js/main.b127c0fb.chunk.js"
+    "static/js/2.1270d18b.chunk.js",
+    "static/css/main.b7d458a7.chunk.css",
+    "static/js/main.cfa0c31a.chunk.js"
   ]
 }

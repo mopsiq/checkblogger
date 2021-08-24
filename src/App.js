@@ -16,28 +16,22 @@ import { Verification } from './pages/Verification/Verification.js';
 // /mopsiq.github.io/checkblogger
 function App() {
 	return (
-		<BrowserRouter basename='/checkblogger'>
-			<Router>
-				<div>
-					<Header />
-					<Switch>
-						<Route path='/'>
-							<Redirect to='/checkblogger/main' />
-						</Route>
-						<Route path='/checkblogger/main' component={Main} />
-						<Route
-							path='/checkblogger/profile'
-							component={UserProfile}
-						/>
-						<Route path='/checkblogger/report' component={Report} />
-						<Route
-							path='/checkblogger/check'
-							component={Verification}
-						/>
-					</Switch>
-				</div>
-			</Router>
-		</BrowserRouter>
+		// <BrowserRouter basename='/checkblogger'>
+		<Router>
+			<div>
+				<Header />
+				<Switch>
+					<Route exact path='/'>
+						<Redirect to='/main' />
+					</Route>
+					<Route path='/main' component={Main} />
+					<Route path='/profile' component={UserProfile} />
+					<Route path='/report' component={Report} />
+					<Route path='/check' component={Verification} />
+				</Switch>
+			</div>
+		</Router>
+		// </BrowserRouter>
 	);
 }
 

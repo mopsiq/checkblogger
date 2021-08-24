@@ -15,18 +15,30 @@ import { Verification } from './pages/Verification/Verification.js';
 
 function App() {
 	return (
-		<BrowserRouter basename='/checkblogger'>
+		<BrowserRouter basename='/mopsiq.github.io/checkblogger'>
 			<Router>
 				<div>
 					<Header />
 					<Switch>
 						<Route exact path='/'>
-							<Redirect to='/main' />
+							<Redirect to='/mopsiq.github.io/checkblogger/main' />
 						</Route>
-						<Route path='/main' component={Main} />
-						<Route path='/profile' component={UserProfile} />
-						<Route path='/report' component={Report} />
-						<Route path='/check' component={Verification} />
+						<Route
+							path='/mopsiq.github.io/checkblogger/main'
+							component={Main}
+						/>
+						<Route
+							path='/mopsiq.github.io/checkblogger/profile'
+							component={UserProfile}
+						/>
+						<Route
+							path='/mopsiq.github.io/checkblogger/report'
+							component={Report}
+						/>
+						<Route
+							path='/mopsiq.github.io/checkblogger/check'
+							component={Verification}
+						/>
 					</Switch>
 				</div>
 			</Router>

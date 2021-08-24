@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/checkblogger/static/css/main.b7d458a7.chunk.css",
-    "main.js": "/checkblogger/static/js/main.cfa0c31a.chunk.js",
-    "main.js.map": "/checkblogger/static/js/main.cfa0c31a.chunk.js.map",
+    "main.css": "/checkblogger/static/css/main.001aedfe.chunk.css",
+    "main.js": "/checkblogger/static/js/main.2f7e9680.chunk.js",
+    "main.js.map": "/checkblogger/static/js/main.2f7e9680.chunk.js.map",
     "runtime-main.js": "/checkblogger/static/js/runtime-main.a916cd51.js",
     "runtime-main.js.map": "/checkblogger/static/js/runtime-main.a916cd51.js.map",
-    "static/js/2.1270d18b.chunk.js": "/checkblogger/static/js/2.1270d18b.chunk.js",
-    "static/js/2.1270d18b.chunk.js.map": "/checkblogger/static/js/2.1270d18b.chunk.js.map",
+    "static/js/2.169df083.chunk.js": "/checkblogger/static/js/2.169df083.chunk.js",
+    "static/js/2.169df083.chunk.js.map": "/checkblogger/static/js/2.169df083.chunk.js.map",
     "index.html": "/checkblogger/index.html",
-    "static/css/main.b7d458a7.chunk.css.map": "/checkblogger/static/css/main.b7d458a7.chunk.css.map",
-    "static/js/2.1270d18b.chunk.js.LICENSE.txt": "/checkblogger/static/js/2.1270d18b.chunk.js.LICENSE.txt",
+    "static/css/main.001aedfe.chunk.css.map": "/checkblogger/static/css/main.001aedfe.chunk.css.map",
+    "static/js/2.169df083.chunk.js.LICENSE.txt": "/checkblogger/static/js/2.169df083.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/checkblogger/static/media/MazzardH-SemiBold.ae8bcb42.ttf",
     "static/media/gears.f6258b35.svg": "/checkblogger/static/media/gears.f6258b35.svg",
     "static/media/group.9cf187f9.svg": "/checkblogger/static/media/group.9cf187f9.svg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.a916cd51.js",
-    "static/js/2.1270d18b.chunk.js",
-    "static/css/main.b7d458a7.chunk.css",
-    "static/js/main.cfa0c31a.chunk.js"
+    "static/js/2.169df083.chunk.js",
+    "static/css/main.001aedfe.chunk.css",
+    "static/js/main.2f7e9680.chunk.js"
   ]
 }

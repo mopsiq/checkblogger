@@ -14,7 +14,7 @@ import { Verification } from './pages/Verification/Verification.js';
 
 function App() {
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename='/checkblogger'>
 			<Router>
 				<div>
 					<Header />

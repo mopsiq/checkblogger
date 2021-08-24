@@ -14,7 +14,6 @@ import { Report } from './pages/Report/Report.js';
 import { Verification } from './pages/Verification/Verification.js';
 
 function App() {
-	const basename = '/checkblogger';
 	return (
 		<BrowserRouter basename='/checkblogger'>
 			<Router>
@@ -27,10 +26,7 @@ function App() {
 						<Route path='/main' component={Main} />
 						<Route path='/profile' component={UserProfile} />
 						<Route path='/report' component={Report} />
-						<Route
-							path={`${basename}/check`}
-							component={Verification}
-						/>
+						<Route path='/check' component={Verification} />
 					</Switch>
 				</div>
 			</Router>

@@ -4,6 +4,7 @@ import {
 	Switch,
 	Route,
 	Redirect,
+	Link,
 	BrowserRouter,
 } from 'react-router-dom';
 import { Header } from './components/Header/Header.js';
@@ -13,6 +14,7 @@ import { Report } from './pages/Report/Report.js';
 import { Verification } from './pages/Verification/Verification.js';
 
 function App() {
+	const basename = '/checkblogger';
 	return (
 		<BrowserRouter basename='/checkblogger'>
 			<Router>
@@ -25,7 +27,10 @@ function App() {
 						<Route path='/main' component={Main} />
 						<Route path='/profile' component={UserProfile} />
 						<Route path='/report' component={Report} />
-						<Route path='/check' component={Verification} />
+						<Route
+							path={`${basename}/check`}
+							component={Verification}
+						/>
 					</Switch>
 				</div>
 			</Router>

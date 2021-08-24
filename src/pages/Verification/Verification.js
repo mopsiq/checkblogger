@@ -11,6 +11,7 @@ import {
 	Package,
 } from '../../components/User/User.js';
 import '../../index.scss';
+import { useFetch } from '../../hooks/useFetch/useFetch.js';
 
 const InstagramAccounts = ({ statusField, data }) => {
 	return (
@@ -24,6 +25,24 @@ const InstagramAccounts = ({ statusField, data }) => {
 				/>
 			</User>
 			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
+			<User statusField={statusField} dataFields={''} />
 		</>
 	);
 };
@@ -34,7 +53,9 @@ function Verification() {
 		activeFocus: false,
 		isLoaded: false,
 		isError: false,
+		similarUsers: [],
 	};
+	const userStatus = false;
 
 	const [localStates, dispatch] = useReducer(reducer, stateFields);
 
@@ -64,6 +85,7 @@ function Verification() {
 		async function fetchDataID(name) {
 			if (name === '') return;
 			dispatchChange('isLoaded', false);
+			// setDataUser('');
 			try {
 				const response = await fetch(
 					`http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&vanityurl=${name}`
@@ -74,19 +96,24 @@ function Verification() {
 				const userProfile = await fetch(
 					`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&steamids=${steamID}`
 				);
-
+				if (userProfile.status !== 200) throw new Error('HTTP error');
 				const userJSON = await userProfile.json();
 				const data = await userJSON.response.players[0];
-				if (data === undefined) return;
+				if (data === undefined) throw new Error('Invalid data');
 				dispatchChange('isError', false);
 				dispatchChange('isLoaded', true);
 				setDataUser(data);
 			} catch (error) {
-				dispatchChange('isError', false);
+				dispatchChange('isError', error.message);
+				dispatchChange('isLoaded', true);
 			}
 		}
 
 		fetchDataID(localStates.value);
+
+		return () => {
+			setDataUser({});
+		};
 	}, [localStates.value]);
 
 	return (
@@ -118,21 +145,33 @@ function Verification() {
 					}
 				>
 					<div className='verification__header'>
-						<div className='verification__noname'>
-							<p className='verification__text'>Аккаунт</p>
-						</div>
-						<div className='verification__noname'>
-							<p className='verification__text verification__text--right'>
-								Подписчики
-							</p>
-						</div>
+						{userStatus ? (
+							<span className='search__help'>
+								Для выполнения проверки воспользуйтесь поиском
+							</span>
+						) : (
+							<>
+								<div className='verification__noname'>
+									<p className='verification__text'>
+										Аккаунт
+									</p>
+								</div>
+								<div className='verification__noname'>
+									<p className='verification__text verification__text--right'>
+										Подписчики
+									</p>
+								</div>
+							</>
+						)}
 					</div>
-					<div className='verification__body'>
-						<InstagramAccounts
-							statusField={localStates.activeFocus}
-							data={dataUser}
-						/>
-					</div>
+					{!userStatus && (
+						<div className='verification__body'>
+							<InstagramAccounts
+								statusField={localStates.activeFocus}
+								data={dataUser}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</>

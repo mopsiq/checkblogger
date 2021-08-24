@@ -72,6 +72,22 @@
   }
 }
 
+.search__help {
+  position: relative;
+  margin: 0 auto 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $secondary;
+  &:after {
+    content: url('../../assets/img/arrow-up.png');
+    position: absolute;
+    left: 100%;
+    right: -0%;
+    top: -100%;
+    z-index: inherit;
+  }
+}
+
 
 .result {
   // display: table;
@@ -97,4 +113,12 @@
 .result__spinner {
   width: 48px;
   height: 48px;
+}
+
+
+.error {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $secondary;
+  text-align: center;
 }

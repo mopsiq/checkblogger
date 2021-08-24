@@ -1,4 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {
+	disableBodyScroll,
+	enableBodyScroll,
+	clearAllBodyScrollLocks,
+	BodyScrollOptions,
+} from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import spinner from '../../assets/img/spinner.gif';
 import {
@@ -13,14 +19,31 @@ import {
 
 import '../../index.scss';
 
-const ErrorBlock = () => {
+const ErrorBlock = ({ errorMessage }) => {
+	const errorStatus = {
+		'HTTP error':
+			'Что-то пошло не так.. Попробуйте перезагрузить страницу ',
+		'Invalid data': 'Такого пользователя нет :(',
+	};
 	return (
 		<>
-			<h3>error</h3>
+			<p className='error'>{errorStatus[errorMessage]}</p>
 		</>
 	);
 };
-const Spinner = ({}) => {
+
+const FunctionalButtonsPart = () => {
+	return (
+		<>
+			<TrashIconButton />,
+			<UserButtonsField
+				textButton={'Проверить'}
+				icon={<Package className='bundle__icon' />}
+			/>
+		</>
+	);
+};
+const Spinner = () => {
 	return (
 		<>
 			<div className='result__loading'>
@@ -36,27 +59,30 @@ const Spinner = ({}) => {
 
 const UserBlock = ({ info, error, focus }) => {
 	return (
-		<div>
+		<>
 			{error ? (
-				'Error message'
+				<ErrorBlock errorMessage={error} />
 			) : (
 				<User focus={focus} dataFields={info}>
-					<TrashIconButton />
-					<UserButtonsField
-						textButton={'Проверить'}
-						icon={<Package className='bundle__icon' />}
-					/>
+					{info.loccityid < 500 ? (
+						<p className='account__inactive'>
+							&#60;500 подписчиков, невозможно проверить
+							пользователя
+						</p>
+					) : (
+						<FunctionalButtonsPart />
+					)}
 				</User>
 			)}
-		</div>
+		</>
 	);
 };
 
-const ResultSearch = ({ info, loader, focus }) => {
+const ResultSearch = ({ info, loader, focus, error }) => {
 	return (
 		<div className='result'>
 			{loader ? (
-				<UserBlock info={info} error={false} focus={focus} />
+				<UserBlock info={info} error={error} focus={focus} />
 			) : (
 				<Spinner />
 			)}
@@ -71,7 +97,12 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		const checkingRoot = (e) => {
 			if (root.current) {
 				root.current.contains(e.target) || setValue('');
-				root.current.contains(e.target) || setFocus('');
+				// root.current.contains(e.target) || setFocus('');
+				root.current.contains(e.target) ||
+					(stateFields.value &&
+						enableBodyScroll(document.body, {
+							reserveScrollBarGap: false,
+						}));
 			}
 			return false;
 		};
@@ -81,8 +112,19 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		return () => {
 			document.removeEventListener('click', checkingRoot);
 		};
-	}, [setValue, setFocus]);
+	}, [setValue, setFocus, stateFields.value]);
 
+	const changeInFocus = () => {
+		setFocus(true);
+		disableBodyScroll(document.body, { reserveScrollBarGap: true });
+	};
+
+	const changeInBlur = () => {
+		setFocus('');
+		enableBodyScroll(document.body, {
+			reserveScrollBarGap: false,
+		});
+	};
 	return (
 		<>
 			<form className={stateFields.value ? 'search active' : 'search'}>
@@ -94,7 +136,8 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						className='search__input'
 						value={stateFields.value}
 						onChange={(e) => setValue(e.target.value)}
-						onFocus={() => setFocus(true)}
+						onFocus={() => changeInFocus()}
+						onBlur={() => changeInBlur()}
 					/>
 				</div>
 				{stateFields.value ? (
@@ -102,6 +145,7 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						info={data}
 						loader={stateFields.isLoaded}
 						focus={stateFields.activeFocus}
+						error={stateFields.isError}
 					/>
 				) : null}
 			</form>

@@ -13,30 +13,25 @@ import { UserProfile } from './pages/UserProfile/UserProfile.js';
 import { Report } from './pages/Report/Report.js';
 import { Verification } from './pages/Verification/Verification.js';
 
+// /mopsiq.github.io/checkblogger
 function App() {
 	return (
-		<BrowserRouter basename='/mopsiq.github.io/checkblogger'>
+		<BrowserRouter basename='/checkblogger'>
 			<Router>
 				<div>
 					<Header />
 					<Switch>
-						<Route exact path='/'>
-							<Redirect to='/mopsiq.github.io/checkblogger/main' />
+						<Route path='/'>
+							<Redirect to='/checkblogger/main' />
 						</Route>
+						<Route path='/checkblogger/main' component={Main} />
 						<Route
-							path='/mopsiq.github.io/checkblogger/main'
-							component={Main}
-						/>
-						<Route
-							path='/mopsiq.github.io/checkblogger/profile'
+							path='/checkblogger/profile'
 							component={UserProfile}
 						/>
+						<Route path='/checkblogger/report' component={Report} />
 						<Route
-							path='/mopsiq.github.io/checkblogger/report'
-							component={Report}
-						/>
-						<Route
-							path='/mopsiq.github.io/checkblogger/check'
+							path='/checkblogger/check'
 							component={Verification}
 						/>
 					</Switch>

@@ -29,6 +29,7 @@
 
 .verification__header {
   display: flex;
+  flex-wrap: wrap;
   padding: 2rem 2.3rem 0; 
 }
 
@@ -38,7 +39,16 @@
 }
 
 .verification__noname {
-  width: 33%;
+  // width: 40%;
+  // margin: 0 3.5%;
+  margin-left: 2%;
+  &--start {
+    width: 28%;
+    margin-left: 0;
+    margin-right: 2%;
+    // margin-right: auto;
+    // width: 55%;
+  }
 }
 
 .verification__text {

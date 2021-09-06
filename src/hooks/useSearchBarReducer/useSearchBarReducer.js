@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useReducer } from 'react';
 
-const useData = () => {
+const useSearchBarReducer = () => {
 	const stateFields = {
 		value: '',
 		activeFocus: false,
@@ -33,4 +33,4 @@ const useData = () => {
 	return { localStates, dispatch, dispatchChange };
 };
 
-export { useData };
+export { useSearchBarReducer };

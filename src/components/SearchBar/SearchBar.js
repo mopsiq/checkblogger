@@ -1,29 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import {
-	disableBodyScroll,
-	enableBodyScroll,
-	clearAllBodyScrollLocks,
-	BodyScrollOptions,
-} from 'body-scroll-lock';
+import React, { useEffect, useRef } from 'react';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import { User, SearchBarField } from '../../components/User/User.js';
 import spinner from '../../assets/img/spinner.gif';
-import {
-	User,
-	TrashIconButton,
-	UserButtonsField,
-	Package,
-	UserTextInfo,
-	UserCheckingStats,
-	ReadyStatsIcon,
-} from '../../components/User/User.js';
-
 import '../../index.scss';
 
 const ErrorBlock = ({ errorMessage }) => {
 	const errorStatus = {
 		'HTTP error':
 			'Что-то пошло не так.. Попробуйте перезагрузить страницу ',
-		'Invalid data': 'Такого пользователя нет :(',
+		'Invalid data':
+			'Упс... Похоже, вы неправильно ввели юзернейм. Попробуйте еще раз!',
 	};
 	return (
 		<>
@@ -32,17 +19,6 @@ const ErrorBlock = ({ errorMessage }) => {
 	);
 };
 
-const FunctionalButtonsPart = () => {
-	return (
-		<>
-			<TrashIconButton />,
-			<UserButtonsField
-				textButton={'Проверить'}
-				icon={<Package className='bundle__icon' />}
-			/>
-		</>
-	);
-};
 const Spinner = () => {
 	return (
 		<>
@@ -63,14 +39,20 @@ const UserBlock = ({ info, error, focus }) => {
 			{error ? (
 				<ErrorBlock errorMessage={error} />
 			) : (
-				<User focus={focus} dataFields={info}>
+				<User
+					focus={focus}
+					avatar={info.avatar}
+					realname={info.realname}
+					username={info.personaname}
+					followers={info.loccityid}
+				>
 					{info.loccityid < 500 ? (
 						<p className='account__inactive'>
 							&#60;500 подписчиков, невозможно проверить
 							пользователя
 						</p>
 					) : (
-						<FunctionalButtonsPart />
+						<SearchBarField info={info} typeButton='solo' />
 					)}
 				</User>
 			)}
@@ -96,8 +78,6 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 	useEffect(() => {
 		const checkingRoot = (e) => {
 			if (root.current) {
-				root.current.contains(e.target) || setValue('');
-				// root.current.contains(e.target) || setFocus('');
 				root.current.contains(e.target) ||
 					(stateFields.value &&
 						enableBodyScroll(document.body, {
@@ -119,8 +99,13 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		disableBodyScroll(document.body, { reserveScrollBarGap: true });
 	};
 
-	const changeInBlur = () => {
-		setFocus('');
+	const changeInBlur = (e) => {
+		e.preventDefault();
+		setTimeout(() => {
+			setFocus('');
+			setValue('');
+		}, 100);
+
 		enableBodyScroll(document.body, {
 			reserveScrollBarGap: false,
 		});
@@ -137,7 +122,7 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						value={stateFields.value}
 						onChange={(e) => setValue(e.target.value)}
 						onFocus={() => changeInFocus()}
-						onBlur={() => changeInBlur()}
+						onBlur={(e) => changeInBlur(e)}
 					/>
 				</div>
 				{stateFields.value ? (

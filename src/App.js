@@ -12,26 +12,29 @@ import { Main } from './pages/Main/Main.js';
 import { UserProfile } from './pages/UserProfile/UserProfile.js';
 import { Report } from './pages/Report/Report.js';
 import { Verification } from './pages/Verification/Verification.js';
+import { Login } from './pages/Login/Login.js';
+import { Store, StoreProvider } from './Store.js';
+import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.js';
 
-// /mopsiq.github.io/checkblogger
 function App() {
 	return (
-		// <BrowserRouter basename='/checkblogger'>
 		<Router>
 			<div>
-				<Header />
-				<Switch>
-					<Route exact path='/'>
-						<Redirect to='/main' />
-					</Route>
-					<Route path='/main' component={Main} />
-					<Route path='/profile' component={UserProfile} />
-					<Route path='/report' component={Report} />
-					<Route path='/check' component={Verification} />
-				</Switch>
+				<StoreProvider>
+					<Header />
+					<Switch>
+						<Route exact path='/'>
+							<Redirect to='/main' />
+						</Route>
+						<Route path='/main' component={Main} />
+						<Route path='/report' component={Report} />
+						<Route path='/check' component={Verification} />
+						<Route path='/login' component={Login} />
+						<PrivateRoute component={UserProfile} path='/profile' />
+					</Switch>
+				</StoreProvider>
 			</div>
 		</Router>
-		// </BrowserRouter>
 	);
 }
 

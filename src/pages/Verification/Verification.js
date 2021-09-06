@@ -1,91 +1,123 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import {
-	User,
-	TrashIconButton,
-	UserButtonsField,
-	UserTextInfo,
-	UserCheckingStats,
-	ReadyStatsIcon,
-	Package,
-} from '../../components/User/User.js';
+import { User, CheckUserField } from '../../components/User/User.js';
+import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
+import { Pagination } from '../../components/Pagination/Pagination.js';
+import { Store } from '../../Store';
+import spinner from '../../assets/img/spinner.gif';
 import '../../index.scss';
-import { useFetch } from '../../hooks/useFetch/useFetch.js';
 
-const InstagramAccounts = ({ statusField, data }) => {
+const VerificationHeaderSubtitles = () => {
 	return (
 		<>
-			<User statusField={statusField} dataFields={''}>
-				<UserTextInfo />
-				<TrashIconButton />
-				<UserButtonsField
-					textButton={'Оплатить'}
-					icon={<Package className='bundle__icon' />}
-				/>
-			</User>
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
+			<div className='verification__noname verification__noname--start'>
+				<p className='verification__text'>Аккаунт</p>
+			</div>
+			<div className='verification__noname'>
+				<p className='verification__text'>Подписчики</p>
+			</div>
+		</>
+	);
+};
+const SearchingHelp = () => {
+	return (
+		<>
+			<span className='search__help'>
+				Для выполнения проверки воспользуйтесь поиском
+			</span>
+		</>
+	);
+};
 
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
-			<User statusField={statusField} dataFields={''} />
+const InstagramAccounts = ({ statusField, data }) => {
+	console.log(data);
+	return (
+		<>
+			{data.slice(0, 10).map((item, index) => (
+				<li key={item.id}>
+					<User
+						statusField={statusField}
+						avatar={item['avatar_url']}
+						realname={item['real_name']}
+						username={item.username}
+						followers={item.loccityid || item.followers}
+					>
+						<CheckUserField
+							state={data}
+							field='searchCheckHistory'
+							id={index}
+						/>
+					</User>
+				</li>
+			))}
+		</>
+	);
+};
+
+const SpinnerPage = () => {
+	return (
+		<>
+			<div className='result__loading page'>
+				<img
+					className='result__spinner'
+					src={spinner}
+					alt='spinner'
+				></img>
+				<p>Загружаю результаты...</p>
+			</div>
+		</>
+	);
+};
+
+const MainBlock = ({ state, reducerStates }) => {
+	return (
+		<>
+			{state.searchCheckHistoryLength === 0 ||
+			state.searchCheckHistory.length === 0 ? (
+				<>
+					<div className='verification__header'>
+						<SearchingHelp />
+					</div>
+				</>
+			) : (
+				<>
+					<div className='verification__header'>
+						<VerificationHeaderSubtitles />
+					</div>
+					<div className='verification__body'>
+						<>
+							<InstagramAccounts
+								statusField={
+									reducerStates.localStates.activeFocus
+								}
+								data={state.searchCheckHistory}
+							/>
+						</>
+					</div>
+				</>
+			)}
 		</>
 	);
 };
 
 function Verification() {
-	const stateFields = {
-		value: '',
-		activeFocus: false,
-		isLoaded: false,
-		isError: false,
-		similarUsers: [],
-	};
-	const userStatus = false;
+	const reducerStates = useSearchBarReducer();
+	const [state, dispatch] = useContext(Store);
+	let PageSize = 10;
 
-	const [localStates, dispatch] = useReducer(reducer, stateFields);
+	const [currentPage, setCurrentPage] = useState(1);
 
-	function reducer(state, action) {
-		switch (action.type) {
-			case 'BOOLEAN_CHANGE':
-				return { ...state, [action.field]: action.payload };
-			case 'BOOLEAN_SWITCH':
-				return { ...state, [action.field]: !state[action.field] };
-			case 'HANDLE_INPUT':
-				return { ...state, [action.field]: action.payload };
-			default:
-				throw new Error();
-		}
-	}
-
-	const dispatchChange = (field, value) => {
-		dispatch({
-			type: 'BOOLEAN_CHANGE',
-			field: field,
-			payload: value,
-		});
-	};
-	const [dataUser, setDataUser] = useState({});
+	const currentTableData = useMemo(() => {
+		const firstPageIndex = (currentPage - 1) * PageSize;
+		const lastPageIndex = firstPageIndex + PageSize;
+		return state.searchCheckHistoryLength;
+	}, [currentPage]);
 
 	useEffect(() => {
 		async function fetchDataID(name) {
 			if (name === '') return;
-			dispatchChange('isLoaded', false);
-			// setDataUser('');
+			reducerStates.dispatchChange('isLoaded', false);
 			try {
 				const response = await fetch(
 					`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&vanityurl=${name}`
@@ -100,80 +132,81 @@ function Verification() {
 				const userJSON = await userProfile.json();
 				const data = await userJSON.response.players[0];
 				if (data === undefined) throw new Error('Invalid data');
-				dispatchChange('isError', false);
-				dispatchChange('isLoaded', true);
-				setDataUser(data);
+				reducerStates.dispatchChange('isError', false);
+				reducerStates.dispatchChange('isLoaded', true);
+				reducerStates.dispatchChange('data', data);
 			} catch (error) {
-				dispatchChange('isError', error.message);
-				dispatchChange('isLoaded', true);
+				reducerStates.dispatchChange('isError', error.message);
+				reducerStates.dispatchChange('isLoaded', true);
 			}
 		}
 
-		fetchDataID(localStates.value);
+		fetchDataID(reducerStates.localStates.value);
 
 		return () => {
-			setDataUser({});
+			reducerStates.dispatchChange('data', {});
 		};
-	}, [localStates.value]);
-
+	}, [reducerStates.localStates.value]);
 	return (
 		<>
-			<div className='container'>
-				<SearchBar
-					stateFields={localStates}
-					setValue={(e) =>
-						dispatch({
-							type: 'HANDLE_INPUT',
-							field: 'value',
-							payload: e,
-						})
-					}
-					setFocus={(e) =>
-						dispatch({
-							type: 'BOOLEAN_CHANGE',
-							field: 'activeFocus',
-							payload: e,
-						})
-					}
-					data={dataUser}
-				/>
-				<div
-					className={
-						localStates.activeFocus || localStates.value
-							? 'verification active'
-							: 'verification'
-					}
-				>
-					<div className='verification__header'>
-						{userStatus ? (
-							<span className='search__help'>
-								Для выполнения проверки воспользуйтесь поиском
-							</span>
-						) : (
-							<>
-								<div className='verification__noname'>
-									<p className='verification__text'>
-										Аккаунт
-									</p>
-								</div>
-								<div className='verification__noname'>
-									<p className='verification__text verification__text--right'>
-										Подписчики
-									</p>
-								</div>
-							</>
-						)}
+			{state.error ? (
+				<>
+					<div className='container'>
+						<p>Error block</p>
 					</div>
-					{!userStatus && (
-						<div className='verification__body'>
-							<InstagramAccounts
-								statusField={localStates.activeFocus}
-								data={dataUser}
+				</>
+			) : (
+				<>
+					<div className='container'>
+						<SearchBar
+							stateFields={reducerStates.localStates}
+							setValue={(e) =>
+								reducerStates.dispatch({
+									type: 'HANDLE_INPUT',
+									field: 'value',
+									payload: e,
+								})
+							}
+							setFocus={(e) =>
+								reducerStates.dispatch({
+									type: 'BOOLEAN_CHANGE',
+									field: 'activeFocus',
+									payload: e,
+								})
+							}
+							data={reducerStates.localStates.data}
+						/>
+						<div
+							className={
+								reducerStates.localStates.activeFocus ||
+								reducerStates.localStates.value
+									? 'verification active'
+									: 'verification'
+							}
+						>
+							{state.reportUsers.length === 0 || state.loaded ? (
+								<SpinnerPage />
+							) : (
+								<MainBlock
+									state={state}
+									reducerStates={reducerStates}
+								/>
+							)}
+							<Pagination
+								className={
+									state.searchCheckHistory.length === 0
+										? 'pagination-bar hidden'
+										: 'pagination-bar'
+								}
+								currentPage={currentPage}
+								totalCount={state.searchCheckHistoryLength}
+								pageSize={PageSize}
+								onPageChange={(page) => setCurrentPage(page)}
 							/>
 						</div>
-					)}
-				</div>
-			</div>
+					</div>
+				</>
+			)}
 		</>
 	);
 }

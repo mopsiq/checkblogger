@@ -1,4 +1,41 @@
 .main {
   background-color: $white;
-  height: 100vh;
+  // width: 1230px;
+  height: 92.8vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.main__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 0 1rem;
+}
+
+.main__title {
+  font-size: 3.8rem;
+  font-weight: 500;
+  width: 734px;
+  color: #CB326B;
+
+}
+.main__subtitle {
+  width: 350px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #A6AEBA;
+  margin-top: 2rem;
+  text-align: right;
+}
+
+.main__img {
+  width: 500px;
+  padding: 0%;
+  margin: 0;
 }

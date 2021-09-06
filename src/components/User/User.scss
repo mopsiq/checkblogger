@@ -3,28 +3,46 @@
   width: 100%;
   position: relative;
   padding: 0.5rem;
-  transition: all .2s linear;
+  margin: 0.5rem 0;  
+
+
+  &:before {
+    display: none;
+  }
+  &.new {
+    &:before {
+      display: block;
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: $brand-light;
+      border-radius: 50%;
+      position: absolute;
+      left: -8px;
+      z-index: inherit;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
   
   &:hover {
     background-color: $light;
-  }
-  &:hover > .account__img {
-    transition: all .2s linear;
   }
   &:hover > .account__btn {
     background-color: $brand;
     color: $white;
     transition: all .2s linear;
-    // margin-left: 0;
   }
   &:hover > .account__count > .account__icon {
     fill: $brand-light;
     transition: all .2s linear;
   }
-  &:hover > .account__status {
+  &:hover > .account__payment {
     display: flex;
   }
-
+  &:hover > .accounts__indicators {
+    display: none;
+  }
   &:hover > .account__btn > .bundle__icon {
     transition: all .2s linear;
     stroke: $white;
@@ -32,11 +50,9 @@
   &:hover > button > .trash__icon {
     display: block;
   }
-  &:hover > .account__item:before {
-    visibility: visible;
-  }
   &:hover >  .account__img {
-    filter: opacity(0.56) drop-shadow(0 0 0 rgb(122, 122, 122));
+    transition: all .2s linear;
+    filter: opacity(0.5) drop-shadow(0 0 0 rgb(122, 122, 122));
   }
 }
 
@@ -63,7 +79,8 @@
   align-items: center;
   align-content: center;
   position: relative;
-  margin-right: auto;
+  // margin-right: 6%;
+  width: 105px;
 }
 .account__icon {
   fill: $gray-light;
@@ -72,13 +89,12 @@
   left: -20px;
 
   transition: all .2s linear;
-
 }
 .account__info {
   margin-left: 2rem;
   width: 28%;
 }
-.account__status {
+.account__payment {
   display: none;
   align-content: center;
   align-items: center;
@@ -89,6 +105,58 @@
   font-size: 0.8rem;
 
   position: relative;
+}
+
+.account__date {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+}
+
+.account__status {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin-left: auto;
+
+
+  &--text {    
+    font-size: 1rem;
+    font-weight: 500;
+    color: #CED4DC;
+    transition: all .2s linear;
+
+    margin-left: 0.5rem;
+  }
+}
+.accounts__indicators {
+  display: flex;
+  margin-right: auto;
+}
+.account__indicator {
+  color: $secondary;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all .2s linear;
+
+  &:first-child {
+    margin-right: 9rem;
+  }
+
+  & > p {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  
 }
 .account__name {
   margin-top: 0.2rem;
@@ -102,7 +170,6 @@
 .account__btn {
   display: flex;
   align-items: center;
-  // margin-left: auto;
 
   background-color: $white;
   color: $brand;
@@ -111,6 +178,10 @@
   padding: 0.7rem 1.9rem 0.7rem 3.5rem;
   position: relative;
   transition: all .2s linear;
+
+  &.solo {
+    margin-left: auto;
+  }
 }
 
 .bundle__icon {
@@ -118,16 +189,25 @@
   left: 16%;
   z-index: 11;
   stroke: #DB84A4;
-  transition: all .2s linear;
-
 }
 
 .trash__icon {
   display: none;
+  margin-left: auto;
   margin-right: 1rem;
   fill: $ghost;
-  transition: all .1s linear;
+  &-disabled {
+    display: none;
+  }
   &:hover {
     fill: $secondary;
   }
+}
+
+.button__icon {
+  margin-left: auto;
+}
+
+.clock__icon {
+  fill: #CED4DC;
 }

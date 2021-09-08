@@ -1,3 +1,7 @@
+const { readFileSync } = require('fs');
+const { join } = require('path');
+const file = readFileSync(join(__dirname, '_files', 'ci.yml'), 'utf8');
+
 const allowCors = (fn) => async (req, res) => {
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	res.setHeader('Access-Control-Allow-Origin', '*');

@@ -17,17 +17,6 @@ import { Store, StoreProvider } from './Store.js';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.js';
 
 function App() {
-	const makeApiCall = async () => {
-		const response = await fetch('http://localhost:9000/cors/', {
-			mode: 'cors',
-		});
-		const jsonr = await response.json();
-		console.log(jsonr);
-	};
-	useEffect(() => {
-		makeApiCall();
-	}, []);
-
 	return (
 		<Router>
 			<div>

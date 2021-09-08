@@ -31,7 +31,6 @@ const SearchingHelp = () => {
 };
 
 const InstagramAccounts = ({ statusField, data }) => {
-	console.log(data);
 	return (
 		<>
 			{data.slice(0, 10).map((item, index) => (

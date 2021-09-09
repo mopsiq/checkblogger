@@ -115,7 +115,7 @@ const Pagination = ({
 					throw new Error('HTTP error');
 				}
 				const requestJSON = await request.json();
-
+				console.log(requestJSON);
 				let count = 0;
 				requestJSON['reportUsers'].forEach((item) =>
 					!item['date_download'] && item['status_payment'] !== 'false'
@@ -167,7 +167,7 @@ const Pagination = ({
 			}
 			console.log('end paginationRequest');
 		};
-		setData('http://localhost:8000/users/1');
+		setData('https://json-mopsiq-fake.herokuapp.com/users/1');
 	}, [currentPage, firstPageIndex]);
 
 	if (currentPage === 0 || paginationRange.length < 2) {

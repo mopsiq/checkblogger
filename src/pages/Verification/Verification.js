@@ -121,13 +121,13 @@ function Verification() {
 			reducerStates.dispatchChange('isLoaded', false);
 			try {
 				const response = await fetch(
-					`http://localhost:9000/steamApiKey/?name=${name}`
+					`https://express-server-mopsiq.herokuapp.com/steamApiKey?name=${name}`
 				);
 				const responseJSON = await response.json();
 				const steamID = await responseJSON.response.steamid;
 
 				const userProfile = await fetch(
-					`http://localhost:9000/steamApiUser/?steamdID=${steamID}`
+					`https://express-server-mopsiq.herokuapp.com/steamApiUser?steamdID=${steamID}`
 				);
 				if (userProfile.status !== 200) throw new Error('HTTP error');
 				const userJSON = await userProfile.json();

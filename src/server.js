@@ -24,6 +24,4 @@ app.get('/steamApiUser', async (req, res) => {
 	res.send(apiResponseJson);
 });
 
-app.listen(9000, () =>
-	console.log('Express server is running on localhost:3001')
-);
+app.listen(9000, () => console.log('Express server is running1'));

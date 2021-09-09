@@ -136,7 +136,9 @@ function Report() {
 			if (name === '') return;
 			reducerStates.dispatchChange('isLoaded', false);
 			try {
-				const response = await fetch(`http://localhost:8000/users/1`);
+				const response = await fetch(
+					`https://json-mopsiq-fake.herokuapp.com/users/1`
+				);
 				const responseJSON = await response.json();
 				const data = responseJSON.reportUsers.find(
 					(item) =>

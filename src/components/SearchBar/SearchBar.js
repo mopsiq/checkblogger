@@ -45,6 +45,8 @@ const UserBlock = ({ info, error, focus }) => {
 					realname={info.realname}
 					username={info.personaname}
 					followers={info.loccityid}
+					downloaded={''}
+					payment={'false'}
 				>
 					{info.loccityid < 500 ? (
 						<p className='account__inactive'>
@@ -104,7 +106,7 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		setTimeout(() => {
 			setFocus('');
 			setValue('');
-		}, 100);
+		}, 150);
 
 		enableBodyScroll(document.body, {
 			reserveScrollBarGap: false,

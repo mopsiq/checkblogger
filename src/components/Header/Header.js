@@ -146,11 +146,11 @@ function Header() {
 									activeClassName='selected'
 								>
 									Отчёты
-									{state.notViewedReports.length > 0 && (
+									{state.notViewedReports > 0 && (
 										<span className='report__count'>
-											{state.notViewedReports.length > 9
+											{state.notViewedReports > 9
 												? '9+'
-												: state.notViewedReports.length}
+												: state.notViewedReports}
 										</span>
 									)}
 								</NavLink>

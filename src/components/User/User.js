@@ -75,13 +75,27 @@ const ReportUserField = ({
 	field,
 	id,
 }) => {
+	const [states, dispatch] = useContext(Store);
+
 	const indicatorWidth = (n) => {
 		return {
 			background: `linear-gradient(white, white) padding-box, conic-gradient(#A6AEBA ${n}%, #F1F2F8 ${n}%) border-box`,
 		};
 	};
 	const click = () => {
-		console.log('click verification but');
+		const newStates = states;
+		if (newStates.reportUsers[id]['date_download'] !== '') {
+			return false;
+		}
+		newStates.reportUsers[id]['date_download'] = '09.09.2021';
+		newStates.notViewedReports -= 1;
+		console.log(newStates);
+
+		dispatch({
+			type: 'SET_DATA',
+			field: 'notViewedReports',
+			payload: newStates.notViewedReports,
+		});
 	};
 	return (
 		<>
@@ -162,8 +176,14 @@ const PendingReport = () => {
 const TrashIconButton = ({ state, field, id }) => {
 	const [states, dispatch] = useContext(Store);
 	const fieldLength = field + 'Length';
-
 	const removeItem = (designationElement) => {
+		if (state[id]['date_download'] === '') {
+			dispatch({
+				type: 'SET_DATA',
+				field: 'notViewedReports',
+				payload: (states.notViewedReports -= 1),
+			});
+		}
 		state.splice(designationElement, 1);
 		dispatch({
 			type: 'SET_DATA',
@@ -224,15 +244,21 @@ const User = ({
 	username,
 	followers,
 	children,
+	downloaded,
+	payment,
 }) => {
 	const [states, dispatch] = useContext(Store);
-
 	const hover = (e) => {
 		// console.log('init');
 		// console.log(e);
 	};
 	return (
-		<div onMouseLeave={(e) => hover(e)} className='account new'>
+		<div
+			onMouseLeave={(e) => hover(e)}
+			className={
+				!downloaded && payment !== 'false' ? 'account new' : 'account'
+			}
+		>
 			<img
 				className={activeFocus ? 'account__img active' : 'account__img'}
 				alt='profile'

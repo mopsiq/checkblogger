@@ -41,6 +41,8 @@ const InstagramAccounts = ({ statusField, data }) => {
 						realname={item['real_name']}
 						username={item.username}
 						followers={item.loccityid || item.followers}
+						downloaded={''}
+						payment={'false'}
 					>
 						<CheckUserField
 							state={data}
@@ -183,7 +185,8 @@ function Verification() {
 									: 'verification'
 							}
 						>
-							{state.reportUsers.length === 0 || state.loaded ? (
+							{/* {state.reportUsers.length === 0 || state.loaded ? :} */}
+							{state.loaded ? (
 								<SpinnerPage />
 							) : (
 								<MainBlock

@@ -25,7 +25,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/83/83d2ab083eb76aebed718fd01921fbe2af2b7e35.jpg",
         "involment": 72,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 95
       },
@@ -37,7 +37,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/45/4577cd3e23682bb95c19e8b89320347e0cc6ead5.jpg",
         "involment": 97,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 88
       },
@@ -49,7 +49,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/27/27fa4e5c8f3068e01815220da735f9b6d83573e4.jpg",
         "involment": 56,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 77
       },
@@ -61,7 +61,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/a9/a935b8edd9e26545947afab0f66132d14d37b82f.jpg",
         "involment": 88,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 65
       },
@@ -73,7 +73,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/78/7888d5f6296c356cb728371b29b448b07c8b4be8.jpg",
         "involment": 80,
         "status_payment": "true",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 76
       },
@@ -85,7 +85,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/17/17f674cc324bb5dc41c28176beee144d061d2e39.jpg",
         "involment": 44,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 32
       },
@@ -97,7 +97,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/37/3780dc87a2d909240d702e617480080917205899.jpg",
         "involment": 11,
         "status_payment": "true",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 5
       },
@@ -109,7 +109,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/b0/b0ea5505ee17936536f3ae3cdc2679d3fc7d759e.jpg",
         "involment": 77,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 34
       },
@@ -121,7 +121,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/88/88dc624781fd43b6d28318a215392d4982173ce8.jpg",
         "involment": 88,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 76
       },
@@ -133,7 +133,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/f9/f90d08f8d24533d1b6cc26755d44a27a9c6ef6c9.jpg",
         "involment": 100,
         "status_payment": "true",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 98
       },
@@ -145,7 +145,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/5d/5d729facc39eabc1eed584169d79d7ca13804866.jpg",
         "involment": 67,
         "status_payment": "true",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 50
       },
@@ -157,7 +157,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/66/662067023ab9af3008a390ad59564c1839a156e2.jpg",
         "involment": 37,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 60
       },
@@ -169,7 +169,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/da/da28f0b6b08d6ed8c7ad7344fa93188be4432525.jpg",
         "involment": 25,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 45
       },
@@ -181,7 +181,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/c2/c22e341ab0fa0e46838971439c9ace58030ac690.jpg",
         "involment": 65,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 15
       },
@@ -193,7 +193,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/b7/b7a5ca8decfa5e4f1ef3484bd94d990089d74966.jpg",
         "involment": 21,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 65
       },
@@ -205,7 +205,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/54/54b03d17ff2af838c754e6017ea30227be503972.jpg",
         "involment": 34,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 33
       },
@@ -217,7 +217,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb.jpg",
         "involment": 9,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 0
       },
@@ -229,7 +229,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/69/69ecb3ca4edbaa0a5e674a08e6e424d9c478dd97.jpg",
         "involment": 87,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 60
       },
@@ -241,7 +241,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/08/08bd794bc2e8a502b2e320f2f08416d91483d2c6.jpg",
         "involment": 91,
         "status_payment": "true",
-        "data_download": "05.09.2021",
+        "date_download": "05.09.2021",
         "data_created": "03.09.2021",
         "qualityAudience": 77
       },
@@ -253,7 +253,7 @@
         "avatar_url": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/91/915cf4845a6faf2db51a611619e3f64ff4cfa310.jpg",
         "involment": 78,
         "status_payment": "false",
-        "data_download": "",
+        "date_download": "",
         "data_created": "03.09.2021",
         "qualityAudience": 42
       }]

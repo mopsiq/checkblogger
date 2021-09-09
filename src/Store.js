@@ -5,7 +5,7 @@ export const Store = createContext('');
 export function StoreProvider(props) {
 	const store = {
 		username: 'Jack',
-		notViewedReports: ['1', '2'],
+		notViewedReports: [],
 		searchCheckHistory: [],
 		searchCheckHistoryLength: 0,
 		reportUsers: [],

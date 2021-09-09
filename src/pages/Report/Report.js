@@ -97,6 +97,8 @@ const InstagramAccounts = ({ statusField, data }) => {
 						realname={item['real_name']}
 						username={item.username}
 						followers={item.followers}
+						downloaded={item['date_download']}
+						payment={item['status_payment']}
 					>
 						{JSON.parse(item['status_payment']) ? (
 							<ReportUserField
@@ -135,13 +137,13 @@ function Report() {
 			reducerStates.dispatchChange('isLoaded', false);
 			try {
 				const response = await fetch(
-					`https://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&vanityurl=${name}`
+					`http://localhost:9000/steamApiKey/?name=${name}`
 				);
 				const responseJSON = await response.json();
 				const steamID = await responseJSON.response.steamid;
 
 				const userProfile = await fetch(
-					`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=3F58E57C4B88ADCBCFCD824EFC80FCFB&steamids=${steamID}`
+					`http://localhost:9000/steamApiUser/?steamdID=${steamID}`
 				);
 				if (userProfile.status !== 200) throw new Error('HTTP error');
 				const userJSON = await userProfile.json();

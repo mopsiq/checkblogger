@@ -25,24 +25,88 @@ const Pagination = ({
 	const lastPageIndex = firstPageIndex + pageSize + 20;
 
 	const [state, dispatch] = useContext(Store);
+	// useEffect(() => {
+	// 	console.log('start paginationRequest');
+	// 	const setData = async (url, fieldData) => {
+	// 		// dispatch({
+	// 		// 	type: 'SET_DATA',
+	// 		// 	field: 'loaded',
+	// 		// 	payload: true,
+	// 		// });
+	// 		dispatch({
+	// 			type: 'SET_DATA',
+	// 			field: fieldData,
+	// 			payload: '',
+	// 		});
+	// 		// dispatch({
+	// 		// 	type: 'SET_DATA',
+	// 		// 	field: 'loaded',
+	// 		// 	payload: true,
+	// 		// });
+
+	// 		try {
+	// 			const request = await fetch(url);
+	// 			if (request.status !== 200) {
+	// 				console.log(request);
+	// 				throw new Error('HTTP error');
+	// 			}
+	// 			const requestJSON = await request.json();
+
+	// 			setTimeout(() => {
+	// 				dispatch({
+	// 					type: 'SET_DATA',
+	// 					field: fieldData,
+	// 					payload: requestJSON[fieldData].slice(
+	// 						firstPageIndex,
+	// 						lastPageIndex
+	// 					),
+	// 				});
+	// 				dispatch({
+	// 					type: 'SET_DATA',
+	// 					field: 'searchCheckHistoryLength',
+	// 					payload: requestJSON['searchCheckHistory'].length,
+	// 				});
+	// 				dispatch({
+	// 					type: 'SET_DATA',
+	// 					field: 'reportUsersLength',
+	// 					payload: requestJSON['reportUsers'].length,
+	// 				});
+
+	// 				dispatch({
+	// 					type: 'SET_DATA',
+	// 					field: 'loaded',
+	// 					payload: false,
+	// 				});
+	// 			}, 3000);
+	// 		} catch (error) {
+	// 			console.log(error);
+	// 			dispatch({ type: 'SET_DATA', field: 'error', payload: true });
+	// 			dispatch({ type: 'SET_DATA', field: 'loaded', payload: false });
+	// 		}
+	// 		console.log('end paginationRequest');
+	// 	};
+	// 	setData('http://localhost:8000/users/1', 'reportUsers');
+	// 	setData('http://localhost:8000/users/1', 'searchCheckHistory');
+	// }, [currentPage, firstPageIndex]);
+
 	useEffect(() => {
 		console.log('start paginationRequest');
 		const setData = async (url, fieldData) => {
-			// dispatch({
-			// 	type: 'SET_DATA',
-			// 	field: 'loaded',
-			// 	payload: true,
-			// });
 			dispatch({
 				type: 'SET_DATA',
-				field: fieldData,
+				field: 'loaded',
+				payload: true,
+			});
+			dispatch({
+				type: 'SET_DATA',
+				field: 'searchCheckHistory',
 				payload: '',
 			});
-			// dispatch({
-			// 	type: 'SET_DATA',
-			// 	field: 'loaded',
-			// 	payload: true,
-			// });
+			dispatch({
+				type: 'SET_DATA',
+				field: 'reportUsers',
+				payload: '',
+			});
 
 			try {
 				const request = await fetch(url);
@@ -52,11 +116,30 @@ const Pagination = ({
 				}
 				const requestJSON = await request.json();
 
+				let count = 0;
+				requestJSON['reportUsers'].forEach((item) =>
+					!item['date_download'] && item['status_payment'] !== 'false'
+						? (count += 1)
+						: (count += 0)
+				);
+				dispatch({
+					type: 'SET_DATA',
+					field: 'notViewedReports',
+					payload: count,
+				});
 				setTimeout(() => {
 					dispatch({
 						type: 'SET_DATA',
-						field: fieldData,
-						payload: requestJSON[fieldData].slice(
+						field: 'searchCheckHistory',
+						payload: requestJSON['searchCheckHistory'].slice(
+							firstPageIndex,
+							lastPageIndex
+						),
+					});
+					dispatch({
+						type: 'SET_DATA',
+						field: 'reportUsers',
+						payload: requestJSON['reportUsers'].slice(
 							firstPageIndex,
 							lastPageIndex
 						),
@@ -71,13 +154,12 @@ const Pagination = ({
 						field: 'reportUsersLength',
 						payload: requestJSON['reportUsers'].length,
 					});
-
 					dispatch({
 						type: 'SET_DATA',
 						field: 'loaded',
 						payload: false,
 					});
-				}, 3000);
+				}, 6000);
 			} catch (error) {
 				console.log(error);
 				dispatch({ type: 'SET_DATA', field: 'error', payload: true });
@@ -85,8 +167,7 @@ const Pagination = ({
 			}
 			console.log('end paginationRequest');
 		};
-		setData('http://localhost:8000/users/1', 'reportUsers');
-		setData('http://localhost:8000/users/1', 'searchCheckHistory');
+		setData('http://localhost:8000/users/1');
 	}, [currentPage, firstPageIndex]);
 
 	if (currentPage === 0 || paginationRange.length < 2) {

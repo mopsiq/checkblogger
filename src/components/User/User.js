@@ -25,7 +25,7 @@ const delimiterString = (string) => {
 	return arrayString.join('');
 };
 
-const SearchBarField = ({ info, typeButton }) => {
+const SearchBarField = ({ info, typeButton, textButton }) => {
 	const [states, dispatch] = useContext(Store);
 	const ids = states.searchCheckHistory.map((item) => item.id);
 	let maxID = Math.max(...ids);
@@ -60,7 +60,7 @@ const SearchBarField = ({ info, typeButton }) => {
 			<UserButtonsField
 				info={info}
 				typeButton={typeButton}
-				textButton={'Проверить'}
+				textButton={textButton}
 				icon={<Package className='bundle__icon' />}
 				onClickFunc={addNewItem}
 			/>

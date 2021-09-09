@@ -136,18 +136,23 @@ function Report() {
 			if (name === '') return;
 			reducerStates.dispatchChange('isLoaded', false);
 			try {
-				const response = await fetch(
-					`http://localhost:9000/steamApiKey/?name=${name}`
-				);
+				const response = await fetch(`http://localhost:8000/users/1`);
 				const responseJSON = await response.json();
-				const steamID = await responseJSON.response.steamid;
-
-				const userProfile = await fetch(
-					`http://localhost:9000/steamApiUser/?steamdID=${steamID}`
+				console.log(responseJSON.reportUsers);
+				const data = responseJSON.reportUsers.find(
+					(item) =>
+						item['real_name'].startsWith(name) ||
+						item['real_name'] === name
 				);
-				if (userProfile.status !== 200) throw new Error('HTTP error');
-				const userJSON = await userProfile.json();
-				const data = await userJSON.response.players[0];
+				console.log(data);
+				// const steamID = await responseJSON.response.steamid;
+
+				// const userProfile = await fetch(
+				// 	`http://localhost:9000/steamApiUser/?steamdID=${steamID}`
+				// );
+				// if (userProfile.status !== 200) throw new Error('HTTP error');
+				// const userJSON = await userProfile.json();
+				// const data = await userJSON.response.players[0];
 				if (data === undefined) throw new Error('Invalid data');
 				reducerStates.dispatchChange('isError', false);
 				reducerStates.dispatchChange('isLoaded', true);

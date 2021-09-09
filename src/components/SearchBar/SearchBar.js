@@ -39,24 +39,32 @@ const UserBlock = ({ info, error, focus }) => {
 			{error ? (
 				<ErrorBlock errorMessage={error} />
 			) : (
-				<User
-					focus={focus}
-					avatar={info.avatar}
-					realname={info.realname}
-					username={info.personaname}
-					followers={info.loccityid}
-					downloaded={''}
-					payment={'false'}
-				>
-					{info.loccityid < 500 ? (
-						<p className='account__inactive'>
-							&#60;500 подписчиков, невозможно проверить
-							пользователя
-						</p>
-					) : (
-						<SearchBarField info={info} typeButton='solo' />
-					)}
-				</User>
+				<>
+					<User
+						focus={focus}
+						avatar={info.avatar || info['avatar_url']}
+						realname={info.realname || info['real_name']}
+						username={info.personaname || info.username}
+						followers={info.loccityid || info.followers}
+						downloaded={''}
+						payment={'false'}
+					>
+						{info.loccityid < 500 ? (
+							<p className='account__inactive'>
+								&#60;500 подписчиков, невозможно проверить
+								пользователя
+							</p>
+						) : (
+							<SearchBarField
+								info={info}
+								typeButton='solo'
+								textButton={
+									info?.steamid ? 'Проверить' : 'Оплатить'
+								}
+							/>
+						)}
+					</User>
+				</>
 			)}
 		</>
 	);

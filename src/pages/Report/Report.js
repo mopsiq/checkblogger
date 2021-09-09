@@ -138,13 +138,18 @@ function Report() {
 			try {
 				const response = await fetch(`http://localhost:8000/users/1`);
 				const responseJSON = await response.json();
-				console.log(responseJSON.reportUsers);
 				const data = responseJSON.reportUsers.find(
 					(item) =>
-						item['real_name'].startsWith(name) ||
-						item['real_name'] === name
+						item['real_name']
+							.toLowerCase()
+							.startsWith(name.toLowerCase()) ||
+						item['real_name']
+							.toUpperCase()
+							.startsWith(name.toUpperCase()) ||
+						item['real_name'].toUpperCase() ===
+							name.toUpperCase() ||
+						item['real_name'].toLowerCase() === name.toLowerCase()
 				);
-				console.log(data);
 				// const steamID = await responseJSON.response.steamid;
 
 				// const userProfile = await fetch(

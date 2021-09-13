@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useContext } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { User, CheckUserField } from '../../components/User/User.js';
@@ -105,6 +106,14 @@ const MainBlock = ({ state, reducerStates }) => {
 function Verification() {
 	const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
+	const isDesktopOrLaptop = useMediaQuery({
+		query: '(min-width: 1224px)',
+	});
+	const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
+	const isTablet = useMediaQuery({ query: '(max-width: 1224px)' });
+	const isMobile = useMediaQuery({ query: '(max-width: 767px )' });
+	const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
+	const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' });
 	let PageSize = 10;
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -189,10 +198,14 @@ function Verification() {
 							{state.loaded ? (
 								<SpinnerPage />
 							) : (
-								<MainBlock
-									state={state}
-									reducerStates={reducerStates}
-								/>
+								<>
+									{/* {isTablet ? <p>IS TABLET</p> : <p>nema</p>}
+									{isMobile ? <p>IS MOBILE</p> : <p>nema</p>} */}
+									<MainBlock
+										state={state}
+										reducerStates={reducerStates}
+									/>
+								</>
 							)}
 							<Pagination
 								className={

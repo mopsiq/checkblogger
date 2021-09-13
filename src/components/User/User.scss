@@ -40,9 +40,9 @@
   &:hover > .account__payment {
     display: flex;
   }
-  &:hover > .accounts__indicators {
-    display: none;
-  }
+  // &:hover > .accounts__indicators {
+  //   display: none;
+  // }
   &:hover > .account__btn > .bundle__icon {
     transition: all .2s linear;
     stroke: $white;

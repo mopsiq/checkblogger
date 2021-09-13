@@ -113,7 +113,7 @@ const ReportUserField = ({
 					<p>{indicatorSecond}%</p>
 				</div>
 			</div>
-			<UserTextInfo />
+			{/* <UserTextInfo /> */}
 			<TrashIconButton state={state} field={field} id={id} />
 			<UserButtonsField
 				textButton={'Скачать отчет'}

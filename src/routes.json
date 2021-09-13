@@ -1,5 +1,0 @@
-{
-  "/report": "/users",
-  "/report/:id": "/users/:id",
-  "/report/:id/history": "/users/:id/searchCheckHistory"
-}

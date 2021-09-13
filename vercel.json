@@ -1,8 +1,0 @@
-{
-  "functions": {
-    "api/steam.js": {
-      "includeFiles": "_files/**"
-    }
-  }
-}
-

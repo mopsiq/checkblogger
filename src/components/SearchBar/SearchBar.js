@@ -106,7 +106,8 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		};
 	}, [setValue, setFocus, stateFields.value]);
 
-	const changeInFocus = () => {
+	const changeInFocus = (e) => {
+		console.log(e);
 		setFocus(true);
 		disableBodyScroll(document.body, { reserveScrollBarGap: true });
 	};
@@ -137,8 +138,11 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						className='search__input'
 						value={stateFields.value}
 						onChange={(e) => setValue(e.target.value)}
-						onFocus={() => changeInFocus()}
+						onFocus={(e) => changeInFocus(e)}
 						onBlur={(e) => changeInBlur(e)}
+						// onTouchEnd={(e) => {
+						// 	changeInFocus(e);
+						// }}
 					/>
 				</div>
 				{stateFields.value ? (

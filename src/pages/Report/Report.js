@@ -11,6 +11,7 @@ import { Pagination } from '../../components/Pagination/Pagination.js';
 import { Store } from '../../Store';
 import spinner from '../../assets/img/spinner.gif';
 import '../../index.scss';
+import { useFetch } from '../../hooks/useFetch/useFetch.js';
 
 const VerificationHeaderSubtitles = ({}) => {
 	return (
@@ -142,43 +143,44 @@ function Report() {
 		return state.reportUsersLength;
 	}, [currentPage]);
 
-	useEffect(() => {
-		async function fetchDataID(name) {
-			if (name === '') return;
-			reducerStates.dispatchChange('isLoaded', false);
-			try {
-				const response = await fetch(
-					`https://json-mopsiq-fake.herokuapp.com/users/1`
-				);
-				const responseJSON = await response.json();
-				const data = responseJSON.reportUsers.find(
-					(item) =>
-						item['real_name']
-							.toLowerCase()
-							.startsWith(name.toLowerCase()) ||
-						item['real_name']
-							.toUpperCase()
-							.startsWith(name.toUpperCase()) ||
-						item['real_name'].toUpperCase() ===
-							name.toUpperCase() ||
-						item['real_name'].toLowerCase() === name.toLowerCase()
-				);
-				if (data === undefined) throw new Error('Invalid data');
-				reducerStates.dispatchChange('isError', false);
-				reducerStates.dispatchChange('isLoaded', true);
-				reducerStates.dispatchChange('data', data);
-			} catch (error) {
-				reducerStates.dispatchChange('isError', error.message);
-				reducerStates.dispatchChange('isLoaded', true);
-			}
-		}
+	const localFetch = useFetch('bd', reducerStates);
+	// useEffect(() => {
+	// 	async function fetchDataID(name) {
+	// 		if (name === '') return;
+	// 		reducerStates.dispatchChange('isLoaded', false);
+	// 		try {
+	// 			const response = await fetch(
+	// 				`https://json-mopsiq-fake.herokuapp.com/users/1`
+	// 			);
+	// 			const responseJSON = await response.json();
+	// 			const data = responseJSON.reportUsers.find(
+	// 				(item) =>
+	// 					item['real_name']
+	// 						.toLowerCase()
+	// 						.startsWith(name.toLowerCase()) ||
+	// 					item['real_name']
+	// 						.toUpperCase()
+	// 						.startsWith(name.toUpperCase()) ||
+	// 					item['real_name'].toUpperCase() ===
+	// 						name.toUpperCase() ||
+	// 					item['real_name'].toLowerCase() === name.toLowerCase()
+	// 			);
+	// 			if (data === undefined) throw new Error('Invalid data');
+	// 			reducerStates.dispatchChange('isError', false);
+	// 			reducerStates.dispatchChange('isLoaded', true);
+	// 			reducerStates.dispatchChange('data', data);
+	// 		} catch (error) {
+	// 			reducerStates.dispatchChange('isError', error.message);
+	// 			reducerStates.dispatchChange('isLoaded', true);
+	// 		}
+	// 	}
 
-		fetchDataID(reducerStates.localStates.value);
+	// 	fetchDataID(reducerStates.localStates.value);
 
-		return () => {
-			reducerStates.dispatchChange('data', {});
-		};
-	}, [reducerStates.localStates.value]);
+	// 	return () => {
+	// 		reducerStates.dispatchChange('data', {});
+	// 	};
+	// }, [reducerStates.localStates.value]);
 
 	return (
 		<>

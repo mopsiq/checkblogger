@@ -298,26 +298,17 @@ const User = ({
 				!downloaded && payment !== 'false' ? 'account new' : 'account'
 			}
 		>
-			{/* <img
-				className={activeFocus ? 'account__img active' : 'account__img'}
-				alt='profile'
-				src={avatar || 'https://via.placeholder.com/48'}
-			></img> */}
 			<div className='account__info'>
 				<img
 					className={
 						activeFocus ? 'account__img active' : 'account__img'
 					}
 					alt='profile'
-					src={avatar || 'https://via.placeholder.com/48'}
+					src={avatar}
 				></img>
 				<div className='account__initials'>
-					<div className='account__name'>
-						{realname || 'John Doe'}
-					</div>
-					<div className='account__url'>
-						@{username || 'johndo123'}
-					</div>
+					<div className='account__name'>{realname}</div>
+					<div className='account__url'>@{username}</div>
 				</div>
 			</div>
 			<div className='account__count'>

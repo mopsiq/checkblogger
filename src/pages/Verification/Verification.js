@@ -4,6 +4,7 @@ import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { User, CheckUserField } from '../../components/User/User.js';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
+import { useFetch } from '../../hooks/useFetch/useFetch.js';
 import { Pagination } from '../../components/Pagination/Pagination.js';
 import { Store } from '../../Store';
 import spinner from '../../assets/img/spinner.gif';
@@ -121,39 +122,8 @@ function Verification() {
 		return state.searchCheckHistoryLength;
 	}, [currentPage]);
 
-	useEffect(() => {
-		async function fetchDataID(name) {
-			if (name === '') return;
-			reducerStates.dispatchChange('isLoaded', false);
-			try {
-				const response = await fetch(
-					`https://express-server-mopsiq.herokuapp.com/steamApiKey?name=${name}`
-				);
-				const responseJSON = await response.json();
-				const steamID = await responseJSON.response.steamid;
+	const localFetch = useFetch('steam', reducerStates);
 
-				const userProfile = await fetch(
-					`https://express-server-mopsiq.herokuapp.com/steamApiUser?steamdID=${steamID}`
-				);
-				if (userProfile.status !== 200) throw new Error('HTTP error');
-				const userJSON = await userProfile.json();
-				const data = await userJSON.response.players[0];
-				if (data === undefined) throw new Error('Invalid data');
-				reducerStates.dispatchChange('isError', false);
-				reducerStates.dispatchChange('isLoaded', true);
-				reducerStates.dispatchChange('data', data);
-			} catch (error) {
-				reducerStates.dispatchChange('isError', error.message);
-				reducerStates.dispatchChange('isLoaded', true);
-			}
-		}
-
-		fetchDataID(reducerStates.localStates.value);
-
-		return () => {
-			reducerStates.dispatchChange('data', {});
-		};
-	}, [reducerStates.localStates.value]);
 	return (
 		<>
 			{state.error ? (

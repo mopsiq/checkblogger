@@ -27,10 +27,11 @@
   }
 }
 
-.verification__header {
+.accounts__subtitles {
   display: flex;
   flex-wrap: wrap;
   padding: 2rem 2.3rem 0; 
+
 }
 
 .verification__body {
@@ -38,7 +39,7 @@
   padding: 0rem 1.5rem 1.5rem 1.5rem; 
 }
 
-.verification__noname {
+.accounts__subtitle {
   // width: 40%;
   // margin: 0 3.5%;
   margin-left: 2%;
@@ -55,4 +56,29 @@
   text-transform: uppercase;
   color: $ghost;
   font-weight: 500;
+}
+
+@media (max-width: 920px) {
+  .accounts__subtitles {
+    &--verification {
+      width: 50%;
+      justify-content: space-between;
+    }
+    &--report {
+      padding: 1rem 1rem 0;
+      justify-content: center;
+    }
+    
+  }
+  .accounts__subtitle {
+    &--start {
+      width: auto;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .verification {
+    background-color: transparent;
+  }
 }

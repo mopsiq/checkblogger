@@ -30,11 +30,14 @@ button:hover {
 
 // Components
 @import './components/Pagination/Pagination.scss';
+@import './components/MobileMenu/MobileMenu.scss';
+
 @import './components/Header/Header.scss';
 @import './components/User/User.scss';
 @import './pages/Verification/Verification.scss';
 
 @import './components/SearchBar/SearchBar.scss';
+
 
 @import './pages/Main/Main.scss';
 @import './pages/Report/Report.scss';
@@ -56,15 +59,14 @@ button:hover {
     margin: 0;
     padding: 0;
   }
-
-  // & > .search:focus-within + .verification:before,
-  // & > .search:focus-within + .report:before {
-  //   visibility: visible;
-  // }
-  // & > .search:focus-within + .verification > .verification__body >  .account > .account__img{
-  //   filter: opacity(0.56) drop-shadow(0 0 0 rgb(122, 122, 122));
-  // }
 }
 
+@media (max-width: 767px) {
+  .container {
+    padding: 0;
+    margin: 1.5rem 0rem 4rem;
+    // margin: 10rem 0;
+  }
+}
 
 

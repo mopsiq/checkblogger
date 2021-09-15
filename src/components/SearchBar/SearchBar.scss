@@ -134,3 +134,20 @@
   color: $secondary;
   text-align: center;
 }
+
+@media (max-width: 767px) {
+  .search {
+    width: 95%;
+    padding: 0;
+    margin: 1rem auto;
+  }
+  .search__container {
+    border: none;
+  }
+  .search__input {
+    border-radius: 10px;
+    &::placeholder {
+      color: #CED4DC;
+    }
+  }
+}

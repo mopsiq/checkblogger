@@ -1,0 +1,8 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 8H28"  stroke-width="2"/>
+<path d="M4 8L6 8"  stroke-width="2"/>
+<path d="M8 16H28"  stroke-width="2"/>
+<path d="M4 16L6 16"  stroke-width="2"/>
+<path d="M8 24H28" stroke-width="2"/>
+<path d="M4 24L6 24"  stroke-width="2"/>
+</svg>

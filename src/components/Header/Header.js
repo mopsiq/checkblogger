@@ -1,13 +1,18 @@
 import React, { useRef, useEffect, useState, useContext } from 'react';
+import { useMediaQuery } from 'react-responsive';
+import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import {
 	BrowserRouter as Router,
 	NavLink,
 	Link,
 	Redirect,
 } from 'react-router-dom';
+import { ReactComponent as PeopleIcon } from '../../assets/icons/people.svg';
 import { ReactComponent as Gears } from '../../assets/icons/gears.svg';
 import { ReactComponent as LogOut } from '../../assets/icons/log-out.svg';
 import { ReactComponent as Logo } from '../../assets/icons/logo-test.svg';
+import { ReactComponent as LogoWhite } from '../../assets/icons/logo-white.svg';
+import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { Store } from '../../Store';
 import '../../index.scss';
 
@@ -120,59 +125,149 @@ const AuthButtons = () => {
 	);
 };
 
-function Header() {
-	const [state, dispatch] = useContext(Store);
+const MobileHeader = () => {
+	const reducerStates = useSearchBarReducer();
+
+	useEffect(() => {
+		async function fetchDataID(name) {
+			if (name === '') return;
+			reducerStates.dispatchChange('isLoaded', false);
+			try {
+				const response = await fetch(
+					`https://json-mopsiq-fake.herokuapp.com/users/1`
+				);
+				const responseJSON = await response.json();
+				const data = responseJSON.reportUsers.find(
+					(item) =>
+						item['real_name']
+							.toLowerCase()
+							.startsWith(name.toLowerCase()) ||
+						item['real_name']
+							.toUpperCase()
+							.startsWith(name.toUpperCase()) ||
+						item['real_name'].toUpperCase() ===
+							name.toUpperCase() ||
+						item['real_name'].toLowerCase() === name.toLowerCase()
+				);
+				if (data === undefined) throw new Error('Invalid data');
+				reducerStates.dispatchChange('isError', false);
+				reducerStates.dispatchChange('isLoaded', true);
+				reducerStates.dispatchChange('data', data);
+			} catch (error) {
+				reducerStates.dispatchChange('isError', error.message);
+				reducerStates.dispatchChange('isLoaded', true);
+			}
+		}
+
+		fetchDataID(reducerStates.localStates.value);
+
+		return () => {
+			reducerStates.dispatchChange('data', {});
+		};
+	}, [reducerStates.localStates.value]);
 	return (
-		<div className='header'>
+		<>
 			<nav className='nav'>
 				<ul className='nav__item'>
 					<li>
-						<NavLink className='nav__logo' to='/main'>
-							<Logo />
+						<NavLink className='nav__logo' to='/report'>
+							<LogoWhite />
+						</NavLink>
+					</li>
+					<li>
+						<NavLink className='nav__icon' to='/profile'>
+							<PeopleIcon />
 						</NavLink>
 					</li>
 				</ul>
-				<ul className='nav__item'>
-					{state.username && (
-						<>
-							<li className='nav__link'>
-								<NavLink to='/check' activeClassName='selected'>
-									Проверка
-								</NavLink>
-							</li>
-							<li className='nav__link'>
-								<NavLink
-									to='/report'
-									activeClassName='selected'
-								>
-									Отчёты
-									{state.notViewedReports > 0 && (
-										<span className='report__count'>
-											{state.notViewedReports > 9
-												? '9+'
-												: state.notViewedReports}
-										</span>
-									)}
-								</NavLink>
-							</li>
-						</>
-					)}
-				</ul>
-				<ul
-					className={
-						state.username
-							? 'nav__item nav__item--right active'
-							: 'nav__item nav__item--right'
+
+				<SearchBar
+					stateFields={reducerStates.localStates}
+					setValue={(e) =>
+						reducerStates.dispatch({
+							type: 'HANDLE_INPUT',
+							field: 'value',
+							payload: e,
+						})
 					}
-				>
-					{state.username ? (
-						<UserMenu username={state.username} />
-					) : (
-						<AuthButtons />
-					)}
-				</ul>
+					setFocus={(e) =>
+						reducerStates.dispatch({
+							type: 'BOOLEAN_CHANGE',
+							field: 'activeFocus',
+							payload: e,
+						})
+					}
+					data={reducerStates.localStates.data}
+				/>
 			</nav>
-		</div>
+		</>
+	);
+};
+
+function Header() {
+	const [state, dispatch] = useContext(Store);
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+
+	return (
+		<>
+			<div className={isMobile ? 'header' : 'header mobile'}>
+				{isMobile ? (
+					<nav className='nav'>
+						<ul className='nav__item'>
+							<li>
+								<NavLink className='nav__logo' to='/main'>
+									<Logo />
+								</NavLink>
+							</li>
+						</ul>
+						<ul className='nav__item'>
+							{state.username && (
+								<>
+									<li className='nav__link'>
+										<NavLink
+											to='/check'
+											activeClassName='selected'
+										>
+											Проверка
+										</NavLink>
+									</li>
+									<li className='nav__link'>
+										<NavLink
+											to='/report'
+											activeClassName='selected'
+										>
+											Отчеты
+											{state.notViewedReports > 0 && (
+												<span className='report__count'>
+													{state.notViewedReports > 9
+														? '9+'
+														: state.notViewedReports}
+												</span>
+											)}
+										</NavLink>
+									</li>
+								</>
+							)}
+						</ul>
+						<ul
+							className={
+								state.username
+									? 'nav__item nav__item--right active'
+									: 'nav__item nav__item--right'
+							}
+						>
+							{state.username ? (
+								<UserMenu username={state.username} />
+							) : (
+								<AuthButtons />
+							)}
+						</ul>
+					</nav>
+				) : (
+					<MobileHeader />
+				)}
+			</div>
+		</>
 	);
 }
 

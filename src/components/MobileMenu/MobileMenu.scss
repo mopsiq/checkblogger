@@ -1,0 +1,32 @@
+.mobile__menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  border-top: 1px solid #CED4DC;
+  border-bottom: 1px solid #CED4DC;
+
+  background-color: $light;
+
+  &--wrapper {
+    display: flex;
+    justify-content: center;
+    // justify-content: space-between;
+  }
+}
+
+.mobile__item {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 2.5rem;
+  stroke: #A6AEBA;
+}
+
+.list__icon {
+  // stroke: #A6AEBA;
+}
+
+.analytics__icon {
+  // stroke: #A6AEBA;
+}

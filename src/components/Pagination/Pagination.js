@@ -123,6 +123,11 @@ const Pagination = ({
 				);
 				dispatch({
 					type: 'SET_DATA',
+					field: 'username',
+					payload: requestJSON.username,
+				});
+				dispatch({
+					type: 'SET_DATA',
 					field: 'notViewedReports',
 					payload: count,
 				});
@@ -158,7 +163,7 @@ const Pagination = ({
 						field: 'loaded',
 						payload: false,
 					});
-				}, 6000);
+				}, 1000);
 			} catch (error) {
 				console.log(error);
 				dispatch({ type: 'SET_DATA', field: 'error', payload: true });

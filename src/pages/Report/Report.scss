@@ -24,3 +24,9 @@
     visibility: hidden;
   }
 }
+
+@media (max-width: 767px) {
+  .report {
+    background-color: transparent;
+  }
+}

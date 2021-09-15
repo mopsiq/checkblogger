@@ -3,7 +3,8 @@
   width: 100%;
   position: relative;
   padding: 0.5rem;
-  margin: 0.5rem 0;  
+  margin: 0.5rem 0; 
+  flex-wrap: wrap; 
 
 
   &:before {
@@ -91,8 +92,12 @@
   transition: all .2s linear;
 }
 .account__info {
+  display: flex;
+  // margin-left: 2rem;
+  width: 34%;
+}
+.account__initials {
   margin-left: 2rem;
-  width: 28%;
 }
 .account__payment {
   display: none;
@@ -131,32 +136,36 @@
 }
 .accounts__indicators {
   display: flex;
+  justify-content: space-between;
+  width: 20%;
   margin-right: auto;
 }
+
 .account__indicator {
+  display: flex;
+  // justify-content: center;
+  flex-direction: column;
+
+  // margin-right: auto;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: $secondary;
   position: relative;
   width: 48px;
   height: 48px;
   border: 3px solid transparent;
   border-radius: 50%;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   transition: all .2s linear;
-
-  &:first-child {
-    margin-right: 9rem;
-  }
-
   & > p {
     font-size: 1rem;
     font-weight: 600;
   }
-
-  
 }
 .account__name {
   margin-top: 0.2rem;
@@ -175,7 +184,7 @@
   color: $brand;
   border: 1px solid $brand;
   border-radius: 0.5rem;
-  padding: 0.7rem 1.9rem 0.7rem 3.5rem;
+  padding: 0.7rem 1.5rem 0.7rem 3rem;
   position: relative;
   transition: all .2s linear;
 
@@ -184,9 +193,35 @@
   }
 }
 
-.bundle__icon {
+.account__remove {
+
   position: absolute;
-  left: 16%;
+  top: 10px;
+  right: 10px;
+  padding: 1rem;
+  width: 40px;
+  &::before, &::after {
+    content: '';
+    background-color: #ccc;
+    width: 24px;
+    height: 3px;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+.bundle__icon {
+  // position: absolute;
+  // left: 16%;
+  margin-right: 0.4rem;
   z-index: 11;
   stroke: #DB84A4;
 }
@@ -210,4 +245,147 @@
 
 .clock__icon {
   fill: #CED4DC;
+}
+
+@media (max-width: 920px) {
+  .account__info {
+    width: 30%;
+  }
+  .account__count {
+    width: 65px;
+  }
+  .button__icon {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  // .button__icon {
+  //   margin-left: 0;
+  // }
+  .account {
+    margin: 1rem 0;
+    background-color: #fff;
+    &:hover > button > .trash__icon {
+      display: none;
+    }
+    border-radius: 10px;
+    padding: 2rem 2rem 1rem;
+    &.new {
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .account__info {
+    width: 100%;
+    margin-bottom: 0.5rem;
+
+  }
+  .account__initials {
+    margin-left: 1rem;
+  }
+  .account__icon {
+    top: 1px;
+  }
+  .account__count {
+    flex-direction: row;
+    width: 100%;
+    margin-left: 5.3rem;
+    margin-bottom: 1rem;
+  }
+  .account__btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .account__status {
+    border: 1px #CED4DC solid;
+    border-radius: 5px;
+    padding: 0.7rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .account__text {
+    text-align: center;
+  }
+  .account__payment {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0.7rem;
+    color: #A6AEBA;
+    & > p {
+      display: flex;
+    }
+  }
+  .account__date {
+    color: #A6AEBA;
+    flex-direction: row;
+  }
+  .accounts__indicators {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 0;
+
+    &:first-child {
+      margin-right: 0;
+    }
+  }
+  .account__indicator {
+    background-color: #FBFBFD;
+    border-radius: 10px;
+    padding: 0.5rem;
+  }
+  .indicator {
+    margin: 0 auto;
+    width: 38px;
+    height: 38px;
+    & > p {
+      font-size: 0.8rem;
+    }
+  }
+  .account__btn {
+    padding: 0.7rem 1rem 0.7rem 2rem;
+  }
+  .account__status--text {
+    text-align: center;
+    margin-left: 0rem;
+    font-size: 0.9rem;
+  }
+  .clock__icon {
+    margin-right: 0.5rem;
+  }
+} 
+
+@media (max-width: 285px) {
+  .account {
+    padding: 0.5rem;
+  }
+  .account__info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .account__btn {
+    padding: 0.7rem 1rem;
+  }
+  .account__initials {
+    margin-left: 0;
+  }
+  .account__img {
+    margin: 0 auto;
+  }
+  .account__count {
+    margin-left: 0;
+    justify-content: center;
+  }
+  .account__icon {
+    position: static;
+    margin-right: 0.5rem;
+  }
+  .accounts__indicators {
+    flex-direction: column;
+  }
 }

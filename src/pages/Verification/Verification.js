@@ -12,10 +12,10 @@ import '../../index.scss';
 const VerificationHeaderSubtitles = () => {
 	return (
 		<>
-			<div className='verification__noname verification__noname--start'>
+			<div className='accounts__subtitle accounts__subtitle--start'>
 				<p className='verification__text'>Аккаунт</p>
 			</div>
-			<div className='verification__noname'>
+			<div className='accounts__subtitle'>
 				<p className='verification__text'>Подписчики</p>
 			</div>
 		</>
@@ -72,21 +72,24 @@ const SpinnerPage = () => {
 	);
 };
 
-const MainBlock = ({ state, reducerStates }) => {
+const MainBlock = ({ state, reducerStates, size }) => {
 	return (
 		<>
 			{state.searchCheckHistoryLength === 0 ||
 			state.searchCheckHistory.length === 0 ? (
 				<>
-					<div className='verification__header'>
+					<div className='accounts__subtitles accounts__subtitles--verification'>
 						<SearchingHelp />
 					</div>
 				</>
 			) : (
 				<>
-					<div className='verification__header'>
-						<VerificationHeaderSubtitles />
-					</div>
+					{size && (
+						<div className='accounts__subtitles accounts__subtitles--verification'>
+							<VerificationHeaderSubtitles />
+						</div>
+					)}
+
 					<div className='verification__body'>
 						<>
 							<InstagramAccounts
@@ -106,14 +109,8 @@ const MainBlock = ({ state, reducerStates }) => {
 function Verification() {
 	const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
-	const isDesktopOrLaptop = useMediaQuery({
-		query: '(min-width: 1224px)',
-	});
-	const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
-	const isTablet = useMediaQuery({ query: '(max-width: 1224px)' });
-	const isMobile = useMediaQuery({ query: '(max-width: 767px )' });
-	const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
-	const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' });
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+
 	let PageSize = 10;
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -168,24 +165,27 @@ function Verification() {
 			) : (
 				<>
 					<div className='container'>
-						<SearchBar
-							stateFields={reducerStates.localStates}
-							setValue={(e) =>
-								reducerStates.dispatch({
-									type: 'HANDLE_INPUT',
-									field: 'value',
-									payload: e,
-								})
-							}
-							setFocus={(e) =>
-								reducerStates.dispatch({
-									type: 'BOOLEAN_CHANGE',
-									field: 'activeFocus',
-									payload: e,
-								})
-							}
-							data={reducerStates.localStates.data}
-						/>
+						{isMobile && (
+							<SearchBar
+								stateFields={reducerStates.localStates}
+								setValue={(e) =>
+									reducerStates.dispatch({
+										type: 'HANDLE_INPUT',
+										field: 'value',
+										payload: e,
+									})
+								}
+								setFocus={(e) =>
+									reducerStates.dispatch({
+										type: 'BOOLEAN_CHANGE',
+										field: 'activeFocus',
+										payload: e,
+									})
+								}
+								data={reducerStates.localStates.data}
+							/>
+						)}
+
 						<div
 							className={
 								reducerStates.localStates.activeFocus ||
@@ -199,11 +199,10 @@ function Verification() {
 								<SpinnerPage />
 							) : (
 								<>
-									{/* {isTablet ? <p>IS TABLET</p> : <p>nema</p>}
-									{isMobile ? <p>IS MOBILE</p> : <p>nema</p>} */}
 									<MainBlock
 										state={state}
 										reducerStates={reducerStates}
+										size={isMobile}
 									/>
 								</>
 							)}

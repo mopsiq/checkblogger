@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { User, SearchBarField } from '../../components/User/User.js';
@@ -84,6 +85,7 @@ const ResultSearch = ({ info, loader, focus, error }) => {
 
 function SearchBar({ stateFields, setValue, setFocus, data }) {
 	const root = useRef();
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 
 	useEffect(() => {
 		const checkingRoot = (e) => {
@@ -127,7 +129,11 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 					<SearchIcon className='search__icon' />
 					<input
 						spellCheck='false'
-						placeholder='Введите юзернейм блогера'
+						placeholder={
+							isMobile
+								? 'Введите юзернейм блогера'
+								: 'Поиск аккаунта'
+						}
 						className='search__input'
 						value={stateFields.value}
 						onChange={(e) => setValue(e.target.value)}

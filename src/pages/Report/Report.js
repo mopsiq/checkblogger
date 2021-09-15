@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import {
 	User,
@@ -14,16 +15,16 @@ import '../../index.scss';
 const VerificationHeaderSubtitles = ({}) => {
 	return (
 		<>
-			<div className='verification__noname verification__noname--start'>
+			<div className='accounts__subtitle accounts__subtitle--start'>
 				<p className='verification__text'>Аккаунт</p>
 			</div>
-			<div className='verification__noname'>
+			<div className='accounts__subtitle'>
 				<p className='verification__text'>Подписчики</p>
 			</div>
-			<div className='verification__noname'>
+			<div className='accounts__subtitle'>
 				<p className='verification__text'>Вовлеченность</p>
 			</div>
-			<div className='verification__noname'>
+			<div className='accounts__subtitle'>
 				<p className='verification__text'>Качественная аудитория</p>
 			</div>
 		</>
@@ -55,20 +56,22 @@ const SpinnerPage = () => {
 	);
 };
 
-const MainBlock = ({ state, reducerStates }) => {
+const MainBlock = ({ state, reducerStates, size }) => {
 	return (
 		<>
 			{state.reportUsersLength === 0 || state.reportUsers.length === 0 ? (
 				<>
-					<div className='verification__header'>
+					<div className='accounts__subtitles accounts__subtitles--report'>
 						<SearchingHelp />
 					</div>
 				</>
 			) : (
 				<>
-					<div className='verification__header'>
-						<VerificationHeaderSubtitles />
-					</div>
+					{size && (
+						<div className='accounts__subtitles accounts__subtitles--report'>
+							<VerificationHeaderSubtitles />
+						</div>
+					)}
 
 					<div className='verification__body'>
 						<>
@@ -121,6 +124,14 @@ const InstagramAccounts = ({ statusField, data }) => {
 function Report() {
 	const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
+	const isDesktopOrLaptop = useMediaQuery({
+		query: '(min-width: 1224px)',
+	});
+	const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
+	const isTablet = useMediaQuery({ query: '(max-width: 1224px)' });
+	const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
+	const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' });
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	let PageSize = 10;
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -152,14 +163,6 @@ function Report() {
 							name.toUpperCase() ||
 						item['real_name'].toLowerCase() === name.toLowerCase()
 				);
-				// const steamID = await responseJSON.response.steamid;
-
-				// const userProfile = await fetch(
-				// 	`http://localhost:9000/steamApiUser/?steamdID=${steamID}`
-				// );
-				// if (userProfile.status !== 200) throw new Error('HTTP error');
-				// const userJSON = await userProfile.json();
-				// const data = await userJSON.response.players[0];
 				if (data === undefined) throw new Error('Invalid data');
 				reducerStates.dispatchChange('isError', false);
 				reducerStates.dispatchChange('isLoaded', true);
@@ -188,24 +191,27 @@ function Report() {
 			) : (
 				<>
 					<div className='container'>
-						<SearchBar
-							stateFields={reducerStates.localStates}
-							setValue={(e) =>
-								reducerStates.dispatch({
-									type: 'HANDLE_INPUT',
-									field: 'value',
-									payload: e,
-								})
-							}
-							setFocus={(e) =>
-								reducerStates.dispatch({
-									type: 'BOOLEAN_CHANGE',
-									field: 'activeFocus',
-									payload: e,
-								})
-							}
-							data={reducerStates.localStates.data}
-						/>
+						{isMobile && (
+							<SearchBar
+								stateFields={reducerStates.localStates}
+								setValue={(e) =>
+									reducerStates.dispatch({
+										type: 'HANDLE_INPUT',
+										field: 'value',
+										payload: e,
+									})
+								}
+								setFocus={(e) =>
+									reducerStates.dispatch({
+										type: 'BOOLEAN_CHANGE',
+										field: 'activeFocus',
+										payload: e,
+									})
+								}
+								data={reducerStates.localStates.data}
+							/>
+						)}
+
 						<div
 							className={
 								reducerStates.localStates.activeFocus ||
@@ -220,6 +226,7 @@ function Report() {
 								<MainBlock
 									state={state}
 									reducerStates={reducerStates}
+									size={isMobile}
 								/>
 							)}
 							<Pagination

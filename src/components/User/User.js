@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { ReactComponent as PeopleIcon } from '../../assets/icons/people.svg';
 import { ReactComponent as Package } from '../../assets/icons/group.svg';
@@ -76,10 +77,12 @@ const ReportUserField = ({
 	id,
 }) => {
 	const [states, dispatch] = useContext(Store);
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+	const currentColor = isMobile ? '#A6AEBA' : '#DB84A4';
 
-	const indicatorWidth = (n) => {
+	const indicatorWidth = (n, color) => {
 		return {
-			background: `linear-gradient(white, white) padding-box, conic-gradient(#A6AEBA ${n}%, #F1F2F8 ${n}%) border-box`,
+			background: `linear-gradient(white, white) padding-box, conic-gradient(${color} ${n}%, #F1F2F8 ${n}%) border-box`,
 		};
 	};
 	const click = () => {
@@ -100,17 +103,27 @@ const ReportUserField = ({
 	return (
 		<>
 			<div className='accounts__indicators'>
-				<div
-					className='account__indicator'
-					style={indicatorWidth(indicatorOne)}
-				>
-					<p>{indicatorOne}%</p>
+				<div className='account__indicator'>
+					<div
+						className='indicator'
+						style={indicatorWidth(indicatorOne, currentColor)}
+					>
+						<p>{indicatorOne}%</p>
+					</div>
+					{!isMobile && (
+						<p className='account__text'>Вовлеченность</p>
+					)}
 				</div>
-				<div
-					className='account__indicator'
-					style={indicatorWidth(indicatorSecond)}
-				>
-					<p>{indicatorSecond}%</p>
+				<div className='account__indicator'>
+					<div
+						className='indicator'
+						style={indicatorWidth(indicatorSecond, currentColor)}
+					>
+						<p>{indicatorSecond}%</p>
+					</div>
+					{!isMobile && (
+						<p className='account__text'>Качественная аудитория</p>
+					)}
 				</div>
 			</div>
 			{/* <UserTextInfo /> */}
@@ -130,7 +143,7 @@ const CheckUserField = ({ state, field, id }) => {
 	};
 	return (
 		<>
-			<UserTextInfo />
+			{/* <UserTextInfo /> */}
 			<TrashIconButton state={state} field={field} id={id} />
 			<UserButtonsField
 				textButton={'Оплатить'}
@@ -142,6 +155,8 @@ const CheckUserField = ({ state, field, id }) => {
 };
 
 const PendingReport = () => {
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+
 	const getDate = () => {
 		const date = new Date().toString();
 		const currentDate = new Date(date);
@@ -159,22 +174,44 @@ const PendingReport = () => {
 
 	return (
 		<>
-			<div className='account__payment'>
-				<p>
-					Ожидаемая дата готовности:
-					<span className='account__date'>{getDate()}</span>
-				</p>
-			</div>
-			<div className='account__status'>
-				<CLockIcon className='clock__icon' />
-				<p className='account__status--text'>Аккаунт на проверке</p>
-			</div>
+			{isMobile ? (
+				<>
+					<div className='account__payment'>
+						<p>
+							Ожидаемая дата готовности:
+							<span className='account__date'>{getDate()}</span>
+						</p>
+					</div>
+					<div className='account__status'>
+						<CLockIcon className='clock__icon' />
+						<p className='account__status--text'>
+							Аккаунт на проверке
+						</p>
+					</div>
+				</>
+			) : (
+				<>
+					<div className='account__status'>
+						<CLockIcon className='clock__icon' />
+						<p className='account__status--text'>
+							Аккаунт на проверке
+						</p>
+					</div>
+					<div className='account__payment'>
+						<p>
+							Ожидаемая дата готовности:
+							<span className='account__date'>{getDate()}</span>
+						</p>
+					</div>
+				</>
+			)}
 		</>
 	);
 };
 
 const TrashIconButton = ({ state, field, id }) => {
 	const [states, dispatch] = useContext(Store);
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	const fieldLength = field + 'Length';
 	const removeItem = (designationElement) => {
 		if (state[id]['date_download'] === '') {
@@ -198,9 +235,16 @@ const TrashIconButton = ({ state, field, id }) => {
 	};
 	return (
 		<>
-			<button onClick={() => removeItem(id)} className='button__icon'>
-				<TrashIcon className='trash__icon' />
-			</button>
+			{isMobile ? (
+				<button onClick={() => removeItem(id)} className='button__icon'>
+					<TrashIcon className='trash__icon' />
+				</button>
+			) : (
+				<button
+					onClick={() => removeItem(id)}
+					className='account__remove'
+				></button>
+			)}
 		</>
 	);
 };
@@ -248,25 +292,33 @@ const User = ({
 	payment,
 }) => {
 	const [states, dispatch] = useContext(Store);
-	const hover = (e) => {
-		// console.log('init');
-		// console.log(e);
-	};
 	return (
 		<div
-			onMouseLeave={(e) => hover(e)}
 			className={
 				!downloaded && payment !== 'false' ? 'account new' : 'account'
 			}
 		>
-			<img
+			{/* <img
 				className={activeFocus ? 'account__img active' : 'account__img'}
 				alt='profile'
 				src={avatar || 'https://via.placeholder.com/48'}
-			></img>
+			></img> */}
 			<div className='account__info'>
-				<div className='account__name'>{realname || 'John Doe'}</div>
-				<div className='account__url'>@{username || 'johndo123'}</div>
+				<img
+					className={
+						activeFocus ? 'account__img active' : 'account__img'
+					}
+					alt='profile'
+					src={avatar || 'https://via.placeholder.com/48'}
+				></img>
+				<div className='account__initials'>
+					<div className='account__name'>
+						{realname || 'John Doe'}
+					</div>
+					<div className='account__url'>
+						@{username || 'johndo123'}
+					</div>
+				</div>
 			</div>
 			<div className='account__count'>
 				<PeopleIcon className='account__icon' />

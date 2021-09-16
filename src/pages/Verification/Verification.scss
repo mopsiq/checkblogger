@@ -59,6 +59,11 @@
 }
 
 @media (max-width: 920px) {
+
+    .verification__body {
+      padding: 0 1rem;
+    }
+
   .accounts__subtitles {
     &--verification {
       width: 50%;

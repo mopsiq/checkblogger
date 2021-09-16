@@ -28,9 +28,12 @@ const delimiterString = (string) => {
 
 const SearchBarField = ({ info, typeButton, textButton }) => {
 	const [states, dispatch] = useContext(Store);
-	const ids = states.searchCheckHistory.map((item) => item.id);
+	const ids =
+		states.searchCheckHistory &&
+		states.searchCheckHistory.map((item) => item.id);
 	let maxID = Math.max(...ids);
 	maxID < 0 ? (maxID = 0) : (maxID += 1);
+
 	const newItems = {
 		id: maxID,
 		real_name: info?.realname,
@@ -92,7 +95,6 @@ const ReportUserField = ({
 		}
 		newStates.reportUsers[id]['date_download'] = '09.09.2021';
 		newStates.notViewedReports -= 1;
-		console.log(newStates);
 
 		dispatch({
 			type: 'SET_DATA',
@@ -126,7 +128,6 @@ const ReportUserField = ({
 					)}
 				</div>
 			</div>
-			{/* <UserTextInfo /> */}
 			<TrashIconButton state={state} field={field} id={id} />
 			<UserButtonsField
 				textButton={'Скачать отчет'}
@@ -138,18 +139,34 @@ const ReportUserField = ({
 };
 
 const CheckUserField = ({ state, field, id }) => {
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+
 	const click = () => {
 		console.log('click verification but');
 	};
 	return (
 		<>
-			{/* <UserTextInfo /> */}
-			<TrashIconButton state={state} field={field} id={id} />
-			<UserButtonsField
-				textButton={'Оплатить'}
-				icon={<Package className='bundle__icon' />}
-				onClickFunc={click}
-			/>
+			{isMobile ? (
+				<>
+					<UserTextInfo />
+					<TrashIconButton state={state} field={field} id={id} />
+					<UserButtonsField
+						textButton={'Оплатить'}
+						icon={<Package className='bundle__icon' />}
+						onClickFunc={click}
+					/>{' '}
+				</>
+			) : (
+				<>
+					<TrashIconButton state={state} field={field} id={id} />
+					<UserButtonsField
+						textButton={'Оплатить'}
+						icon={<Package className='bundle__icon' />}
+						onClickFunc={click}
+					/>
+					<UserTextInfo />
+				</>
+			)}
 		</>
 	);
 };

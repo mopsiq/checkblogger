@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
-import { User, SearchBarField } from '../../components/User/User.js';
+import {
+	User,
+	SearchBarField,
+	SearchBarMobileField,
+} from '../../components/User/User.js';
 import spinner from '../../assets/img/spinner.gif';
 import '../../index.scss';
 
@@ -107,7 +111,6 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 	}, [setValue, setFocus, stateFields.value]);
 
 	const changeInFocus = (e) => {
-		console.log(e);
 		setFocus(true);
 		disableBodyScroll(document.body, { reserveScrollBarGap: true });
 	};
@@ -126,7 +129,14 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 	return (
 		<>
 			<form className={stateFields.value ? 'search active' : 'search'}>
-				<div ref={root} className='search__container'>
+				<div
+					ref={root}
+					className={
+						stateFields.value && !isMobile
+							? 'search__container active'
+							: 'search__container'
+					}
+				>
 					<SearchIcon className='search__icon' />
 					<input
 						spellCheck='false'
@@ -140,8 +150,8 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						onChange={(e) => setValue(e.target.value)}
 						onFocus={(e) => changeInFocus(e)}
 						onBlur={(e) => changeInBlur(e)}
-						// onTouchEnd={(e) => {
-						// 	changeInFocus(e);
+						// onTouchCancel={(e) => {
+						// 	changeInBlur(e);
 						// }}
 					/>
 				</div>

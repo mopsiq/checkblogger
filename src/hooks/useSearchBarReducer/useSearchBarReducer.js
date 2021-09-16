@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 
 const useSearchBarReducer = () => {
 	const stateFields = {

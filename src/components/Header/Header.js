@@ -138,6 +138,13 @@ const MobileHeader = () => {
 		locationPathURLS[currentLoc.pathname],
 		reducerStates
 	);
+
+	const getCurrentPath = (path) => {
+		return Boolean(
+			Object.keys(locationPathURLS).find((item) => item === path)
+		);
+	};
+
 	return (
 		<>
 			<nav className='nav'>
@@ -154,24 +161,26 @@ const MobileHeader = () => {
 					</li>
 				</ul>
 
-				<SearchBar
-					stateFields={reducerStates.localStates}
-					setValue={(e) =>
-						reducerStates.dispatch({
-							type: 'HANDLE_INPUT',
-							field: 'value',
-							payload: e,
-						})
-					}
-					setFocus={(e) =>
-						reducerStates.dispatch({
-							type: 'BOOLEAN_CHANGE',
-							field: 'activeFocus',
-							payload: e,
-						})
-					}
-					data={reducerStates.localStates.data}
-				/>
+				{getCurrentPath(currentLoc.pathname) && (
+					<SearchBar
+						stateFields={reducerStates.localStates}
+						setValue={(e) =>
+							reducerStates.dispatch({
+								type: 'HANDLE_INPUT',
+								field: 'value',
+								payload: e,
+							})
+						}
+						setFocus={(e) =>
+							reducerStates.dispatch({
+								type: 'BOOLEAN_CHANGE',
+								field: 'activeFocus',
+								payload: e,
+							})
+						}
+						data={reducerStates.localStates.data}
+					/>
+				)}
 			</nav>
 		</>
 	);

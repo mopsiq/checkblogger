@@ -164,7 +164,6 @@ function Verification() {
 									: 'verification'
 							}
 						>
-							{/* {state.reportUsers.length === 0 || state.loaded ? :} */}
 							{state.loaded ? (
 								<SpinnerPage />
 							) : (

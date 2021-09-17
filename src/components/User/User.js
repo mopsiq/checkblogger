@@ -102,6 +102,10 @@ const ReportUserField = ({
 			payload: newStates.notViewedReports,
 		});
 	};
+
+	const currentItemIndex = states.reportUsers.findIndex((item, index) =>
+		item.id === id ? index : false
+	);
 	return (
 		<>
 			<div className='accounts__indicators'>
@@ -128,7 +132,11 @@ const ReportUserField = ({
 					)}
 				</div>
 			</div>
-			<TrashIconButton state={state} field={field} id={id} />
+			<TrashIconButton
+				state={states.reportUsers}
+				field={field}
+				id={currentItemIndex}
+			/>
 			<UserButtonsField
 				textButton={'Скачать отчет'}
 				icon={<ReadyStatsIcon className='bundle__icon' />}
@@ -154,7 +162,7 @@ const CheckUserField = ({ state, field, id }) => {
 						textButton={'Оплатить'}
 						icon={<Package className='bundle__icon' />}
 						onClickFunc={click}
-					/>{' '}
+					/>
 				</>
 			) : (
 				<>
@@ -230,7 +238,10 @@ const TrashIconButton = ({ state, field, id }) => {
 	const [states, dispatch] = useContext(Store);
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	const fieldLength = field + 'Length';
-	const removeItem = (designationElement) => {
+
+	const removeItem = (event, designationElement) => {
+		event.preventDefault();
+
 		if (state[id]['date_download'] === '') {
 			dispatch({
 				type: 'SET_DATA',
@@ -253,12 +264,15 @@ const TrashIconButton = ({ state, field, id }) => {
 	return (
 		<>
 			{isMobile ? (
-				<button onClick={() => removeItem(id)} className='button__icon'>
+				<button
+					onClick={(e) => removeItem(e, id)}
+					className='button__icon'
+				>
 					<TrashIcon className='trash__icon' />
 				</button>
 			) : (
 				<button
-					onClick={() => removeItem(id)}
+					onClick={(e) => removeItem(e, id)}
 					className='account__remove'
 				></button>
 			)}

@@ -47,7 +47,7 @@ const GetterComponent = ({ info }) => {
 					<ReportUserField
 						indicatorOne={info.involment}
 						indicatorSecond={info.qualityAudience}
-						state={data}
+						state={info}
 						field={'reportUsers'}
 						id={info.id}
 					/>
@@ -185,9 +185,6 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 						onChange={(e) => setValue(e.target.value)}
 						onFocus={(e) => changeInFocus(e)}
 						onBlur={(e) => changeInBlur(e)}
-						// onTouchCancel={(e) => {
-						// 	changeInBlur(e);
-						// }}
 					/>
 				</div>
 				{stateFields.value ? (

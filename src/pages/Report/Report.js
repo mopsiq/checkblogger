@@ -110,7 +110,7 @@ const InstagramAccounts = ({ statusField, data }) => {
 								indicatorSecond={item.qualityAudience}
 								state={data}
 								field={'reportUsers'}
-								id={index}
+								id={item.id}
 							/>
 						) : (
 							<PendingReport date={item['data_created']} />

@@ -84,6 +84,19 @@
     color: #DB84A4;
     border-color: #DB84A4;
   }
+
+  &--main {
+    border-color: $white;
+    background-color: transparent;
+    flex-direction: column;
+    margin: 1rem 0;
+    padding: 0.5 1rem;
+    width: fit-content;
+    z-index: 99;
+    &:hover {
+      background-color: $white;
+    }
+  }
 }
 
 .nav__icon {

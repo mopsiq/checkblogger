@@ -2,18 +2,13 @@ import React, { useRef, useEffect, useState, useContext } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { useFetch } from '../../hooks/useFetch/useFetch.js';
-import {
-	BrowserRouter as Router,
-	NavLink,
-	Link,
-	useLocation,
-	Redirect,
-} from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { ReactComponent as PeopleIcon } from '../../assets/icons/people.svg';
 import { ReactComponent as Gears } from '../../assets/icons/gears.svg';
 import { ReactComponent as LogOut } from '../../assets/icons/log-out.svg';
 import { ReactComponent as Logo } from '../../assets/icons/logo-test.svg';
 import { ReactComponent as LogoWhite } from '../../assets/icons/logo-white.svg';
+import { ReactComponent as AccountIcon } from '../../assets/icons/account.svg';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { Store } from '../../Store';
 import '../../index.scss';
@@ -127,7 +122,7 @@ const AuthButtons = () => {
 	);
 };
 
-const MobileHeader = () => {
+const MobileHeader = ({ state }) => {
 	const reducerStates = useSearchBarReducer();
 	const currentLoc = useLocation();
 	const locationPathURLS = {
@@ -156,7 +151,7 @@ const MobileHeader = () => {
 					</li>
 					<li>
 						<NavLink className='nav__icon' to='/profile'>
-							<PeopleIcon />
+							<AccountIcon />
 						</NavLink>
 					</li>
 				</ul>
@@ -246,7 +241,7 @@ function Header() {
 						</ul>
 					</nav>
 				) : (
-					<MobileHeader />
+					<>{state.username && <MobileHeader state={state} />}</>
 				)}
 			</div>
 		</>

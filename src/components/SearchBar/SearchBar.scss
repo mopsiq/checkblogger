@@ -171,6 +171,13 @@
       color: #CED4DC;
     }
   }
+  .search__help {
+    margin: 0.5rem auto 0;
+    &:after {
+      top: -50px;
+      left: 0;
+    }
+  }
   .result__loading {
     &.page {
       height: auto;

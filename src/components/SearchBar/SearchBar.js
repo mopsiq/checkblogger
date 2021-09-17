@@ -5,7 +5,8 @@ import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import {
 	User,
 	SearchBarField,
-	SearchBarMobileField,
+	PendingReport,
+	ReportUserField,
 } from '../../components/User/User.js';
 import spinner from '../../assets/img/spinner.gif';
 import '../../index.scss';
@@ -38,6 +39,46 @@ const Spinner = () => {
 	);
 };
 
+const GetterComponent = ({ info }) => {
+	const listFields = (data) => {
+		switch (data) {
+			case 'ReportUserField':
+				return (
+					<ReportUserField
+						indicatorOne={info.involment}
+						indicatorSecond={info.qualityAudience}
+						state={data}
+						field={'reportUsers'}
+						id={info.id}
+					/>
+				);
+			case 'SearchField':
+				return (
+					<SearchBarField
+						info={info}
+						typeButton='solo'
+						textButton={info?.steamid ? 'Проверить' : 'Оплатить'}
+					/>
+				);
+			case 'PendingField':
+				return <PendingReport date={info['data_created']} />;
+			default:
+				return false;
+		}
+	};
+	return (
+		<>
+			{info['status_payment'] &&
+				JSON.parse(info['status_payment']) &&
+				listFields('ReportUserField')}
+			{info['status_payment'] &&
+				!JSON.parse(info['status_payment']) &&
+				listFields('PendingField')}
+			{info['steamid'] && listFields('SearchField')}
+		</>
+	);
+};
+
 const UserBlock = ({ info, error, focus }) => {
 	return (
 		<>
@@ -60,13 +101,7 @@ const UserBlock = ({ info, error, focus }) => {
 								пользователя
 							</p>
 						) : (
-							<SearchBarField
-								info={info}
-								typeButton='solo'
-								textButton={
-									info?.steamid ? 'Проверить' : 'Оплатить'
-								}
-							/>
+							<GetterComponent info={info} />
 						)}
 					</User>
 				</>

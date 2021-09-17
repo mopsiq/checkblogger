@@ -73,6 +73,12 @@
       padding: 1rem 1rem 0;
       justify-content: center;
     }
+
+    &--searching {
+      text-align: center;
+      padding: 3rem 0;
+      background-color: $white;
+    }
     
   }
   .accounts__subtitle {

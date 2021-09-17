@@ -79,7 +79,7 @@ const MainBlock = ({ state, reducerStates, size }) => {
 			{state.searchCheckHistoryLength === 0 ||
 			state.searchCheckHistory.length === 0 ? (
 				<>
-					<div className='accounts__subtitles accounts__subtitles--verification'>
+					<div className='accounts__subtitles accounts__subtitles--searching'>
 						<SearchingHelp />
 					</div>
 				</>

@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { Header } from '../Header/Header.js';
 import { Store } from '../../Store.js';
 
 const PrivateRoute = ({
@@ -8,11 +10,10 @@ const PrivateRoute = ({
 	pathRedirect = '/',
 	...rest
 }) => {
+	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	const [state, dispatch] = useContext(Store);
-	// mode ? !state.username : state.username
 	const isLogin = (user) => {
 		return mode ? !user : user;
-		return user ? true : false;
 	};
 
 	return (
@@ -20,7 +21,9 @@ const PrivateRoute = ({
 			{...rest}
 			render={(props) =>
 				isLogin(state.username) ? (
-					<Component {...props} />
+					<>
+						<Component {...props} />
+					</>
 				) : (
 					<Redirect to={pathRedirect} />
 				)

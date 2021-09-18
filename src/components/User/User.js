@@ -88,7 +88,7 @@ const ReportUserField = ({
 			background: `linear-gradient(white, white) padding-box, conic-gradient(${color} ${n}%, #F1F2F8 ${n}%) border-box`,
 		};
 	};
-	const click = () => {
+	const click = (id) => {
 		const newStates = states;
 		if (newStates.reportUsers[id]['date_download'] !== '') {
 			return false;
@@ -103,8 +103,8 @@ const ReportUserField = ({
 		});
 	};
 
-	const currentItemIndex = states.reportUsers.findIndex((item, index) =>
-		item.id === id ? index : false
+	const currentItemIndex = states.reportUsers.findIndex(
+		(item) => item.id === id
 	);
 	return (
 		<>
@@ -140,7 +140,7 @@ const ReportUserField = ({
 			<UserButtonsField
 				textButton={'Скачать отчет'}
 				icon={<ReadyStatsIcon className='bundle__icon' />}
-				onClickFunc={click}
+				onClickFunc={() => click(currentItemIndex)}
 			/>
 		</>
 	);

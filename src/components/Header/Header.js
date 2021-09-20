@@ -3,7 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { useFetch } from '../../hooks/useFetch/useFetch.js';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { ReactComponent as PeopleIcon } from '../../assets/icons/people.svg';
 import { ReactComponent as Gears } from '../../assets/icons/gears.svg';
 import { ReactComponent as LogOut } from '../../assets/icons/log-out.svg';
 import { ReactComponent as Logo } from '../../assets/icons/logo-test.svg';
@@ -18,6 +17,7 @@ const UserMenu = ({ username }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const root = useRef();
 
+	// Сократить обнуление стора до одного вызова
 	const buttonsExit = () => {
 		setIsOpen(false);
 		dispatch({
@@ -185,6 +185,7 @@ function Header() {
 	const [state, dispatch] = useContext(Store);
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 
+	// Вынести nav в отдельный компонент
 	return (
 		<>
 			<div className={isMobile ? 'header' : 'header mobile'}>

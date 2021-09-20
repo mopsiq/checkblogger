@@ -1,10 +1,5 @@
 import React, { useContext } from 'react';
-import {
-	BrowserRouter as Router,
-	NavLink,
-	Link,
-	Redirect,
-} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { ReactComponent as List } from '../../assets/icons/list.svg';
 import { ReactComponent as Analytics } from '../../assets/icons/analytics.svg';
 import { Store } from '../../Store';

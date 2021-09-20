@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Redirect,
-	Link,
-	BrowserRouter,
 } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { Header } from './components/Header/Header.js';
@@ -15,7 +13,7 @@ import { Report } from './pages/Report/Report.js';
 import { Verification } from './pages/Verification/Verification.js';
 import { Login } from './pages/Login/Login.js';
 import { MobileMenu } from './components/MobileMenu/MobileMenu.js';
-import { Store, StoreProvider } from './Store.js';
+import { StoreProvider } from './Store.js';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute.js';
 
 function App() {

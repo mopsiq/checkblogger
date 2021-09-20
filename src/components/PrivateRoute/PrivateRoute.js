@@ -4,6 +4,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Header } from '../Header/Header.js';
 import { Store } from '../../Store.js';
 
+// Переименовать аргумент mode на что-то более подходящее
 const PrivateRoute = ({
 	component: Component,
 	mode = '',

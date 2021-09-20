@@ -105,7 +105,7 @@ const Pagination = ({
 			}
 			console.log('end paginationRequest');
 		};
-		setData('https://json-mopsiq-fake.herokuapp.com/users/1');
+		// setData('https://json-mopsiq-fake.herokuapp.com/users/1');
 	}, [currentPage, firstPageIndex]);
 
 	if (currentPage === 0 || paginationRange.length < 2) {

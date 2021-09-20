@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo, useContext } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { User, CheckUserField } from '../../components/User/User.js';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { useFetch } from '../../hooks/useFetch/useFetch.js';

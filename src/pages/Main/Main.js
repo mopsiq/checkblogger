@@ -38,20 +38,6 @@ function Main() {
 					</div>
 
 					<img className='main__img' alt='saly' src={image}></img>
-					{/* <div className='main__authbtn'>
-						<NavLink
-							className='nav__btn nav__btn--main'
-							to='/login'
-						>
-							Зарегистрироваться
-						</NavLink>
-						<NavLink
-							className='nav__btn nav__btn--main'
-							to='/login'
-						>
-							Войти
-						</NavLink>
-					</div> */}
 				</div>
 			</div>
 		</>

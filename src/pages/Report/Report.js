@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import {
@@ -125,13 +125,6 @@ const InstagramAccounts = ({ statusField, data }) => {
 function Report() {
 	const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
-	const isDesktopOrLaptop = useMediaQuery({
-		query: '(min-width: 1224px)',
-	});
-	const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
-	const isTablet = useMediaQuery({ query: '(max-width: 1224px)' });
-	const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
-	const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' });
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	let PageSize = 10;
 
@@ -144,43 +137,6 @@ function Report() {
 	}, [currentPage]);
 
 	const localFetch = useFetch('bd', reducerStates);
-	// useEffect(() => {
-	// 	async function fetchDataID(name) {
-	// 		if (name === '') return;
-	// 		reducerStates.dispatchChange('isLoaded', false);
-	// 		try {
-	// 			const response = await fetch(
-	// 				`https://json-mopsiq-fake.herokuapp.com/users/1`
-	// 			);
-	// 			const responseJSON = await response.json();
-	// 			const data = responseJSON.reportUsers.find(
-	// 				(item) =>
-	// 					item['real_name']
-	// 						.toLowerCase()
-	// 						.startsWith(name.toLowerCase()) ||
-	// 					item['real_name']
-	// 						.toUpperCase()
-	// 						.startsWith(name.toUpperCase()) ||
-	// 					item['real_name'].toUpperCase() ===
-	// 						name.toUpperCase() ||
-	// 					item['real_name'].toLowerCase() === name.toLowerCase()
-	// 			);
-	// 			if (data === undefined) throw new Error('Invalid data');
-	// 			reducerStates.dispatchChange('isError', false);
-	// 			reducerStates.dispatchChange('isLoaded', true);
-	// 			reducerStates.dispatchChange('data', data);
-	// 		} catch (error) {
-	// 			reducerStates.dispatchChange('isError', error.message);
-	// 			reducerStates.dispatchChange('isLoaded', true);
-	// 		}
-	// 	}
-
-	// 	fetchDataID(reducerStates.localStates.value);
-
-	// 	return () => {
-	// 		reducerStates.dispatchChange('data', {});
-	// 	};
-	// }, [reducerStates.localStates.value]);
 
 	return (
 		<>

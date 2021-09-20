@@ -1,10 +1,9 @@
-import React, { useReducer, useEffect, createContext } from 'react';
-import { useFetch } from './hooks/useFetch/useFetch';
+import React, { useReducer, createContext } from 'react';
 
 export const Store = createContext('');
 export function StoreProvider(props) {
 	const store = {
-		username: 'Jack',
+		username: '',
 		notViewedReports: [],
 		searchCheckHistory: [],
 		searchCheckHistoryLength: 0,

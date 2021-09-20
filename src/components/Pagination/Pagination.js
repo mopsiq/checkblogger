@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { Store } from '../../Store';
-// import { useFetch } from '../../hooks/useFetch/useFetch.js';
 
 import {
 	usePagination,
@@ -25,6 +24,7 @@ const Pagination = ({
 	const lastPageIndex = firstPageIndex + pageSize + 20;
 
 	const [state, dispatch] = useContext(Store);
+
 	useEffect(() => {
 		console.log('start paginationRequest');
 		const setData = async (url, fieldData) => {
@@ -33,16 +33,16 @@ const Pagination = ({
 				field: 'loaded',
 				payload: true,
 			});
-			dispatch({
-				type: 'SET_DATA',
-				field: 'searchCheckHistory',
-				payload: '',
-			});
-			dispatch({
-				type: 'SET_DATA',
-				field: 'reportUsers',
-				payload: '',
-			});
+			// dispatch({
+			// 	type: 'SET_DATA',
+			// 	field: 'searchCheckHistory',
+			// 	payload: '',
+			// });
+			// dispatch({
+			// 	type: 'SET_DATA',
+			// 	field: 'reportUsers',
+			// 	payload: '',
+			// });
 
 			try {
 				const request = await fetch(url);
@@ -57,11 +57,12 @@ const Pagination = ({
 						? (count += 1)
 						: (count += 0)
 				);
-				dispatch({
-					type: 'SET_DATA',
-					field: 'username',
-					payload: requestJSON.username,
-				});
+				console.log(requestJSON);
+				// dispatch({
+				// 	type: 'SET_DATA',
+				// 	field: 'username',
+				// 	payload: requestJSON.username,
+				// });
 				dispatch({
 					type: 'SET_DATA',
 					field: 'notViewedReports',
@@ -99,7 +100,6 @@ const Pagination = ({
 					payload: false,
 				});
 			} catch (error) {
-				console.log(error);
 				dispatch({ type: 'SET_DATA', field: 'error', payload: true });
 				dispatch({ type: 'SET_DATA', field: 'loaded', payload: false });
 			}

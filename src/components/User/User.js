@@ -14,7 +14,7 @@ const delimiterString = (string) => {
 	let count = arrayString.length;
 	if (arrayString.length <= 3) return string;
 
-	arrayString.forEach((_) => {
+	arrayString.forEach(() => {
 		if (count - 3 <= 0) {
 			return false;
 		} else {
@@ -179,14 +179,22 @@ const CheckUserField = ({ state, field, id }) => {
 	);
 };
 
-const PendingReport = () => {
+const PendingReport = ({ date }) => {
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 
-	const getDate = () => {
-		const date = new Date().toString();
-		const currentDate = new Date(date);
+	const reverseDateString = (date) => {
+		const dateStringInArray = date.split('');
+		const daysIsDate = date.slice(0, 2);
+		const monthsIsDate = date.slice(3, 5);
+		dateStringInArray.splice(0, 2, ...monthsIsDate);
+		dateStringInArray.splice(3, 2, ...daysIsDate);
+		return dateStringInArray.join('');
+	};
+
+	const getDate = (date) => {
+		const dateCreateAcc = new Date(reverseDateString(date));
 		const expectedDate = new Date(
-			currentDate.setDate(currentDate.getDate() + 2)
+			dateCreateAcc.setDate(dateCreateAcc.getDate() + 2)
 		);
 		const day = expectedDate.getDate();
 		const month = expectedDate.getMonth() + 1;
@@ -204,7 +212,9 @@ const PendingReport = () => {
 					<div className='account__payment'>
 						<p>
 							Ожидаемая дата готовности:
-							<span className='account__date'>{getDate()}</span>
+							<span className='account__date'>
+								{getDate(date)}
+							</span>
 						</p>
 					</div>
 					<div className='account__status'>
@@ -225,7 +235,9 @@ const PendingReport = () => {
 					<div className='account__payment'>
 						<p>
 							Ожидаемая дата готовности:
-							<span className='account__date'>{getDate()}</span>
+							<span className='account__date'>
+								{getDate(date)}
+							</span>
 						</p>
 					</div>
 				</>

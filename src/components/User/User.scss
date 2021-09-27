@@ -4,8 +4,6 @@
   position: relative;
   padding: 0.5rem;
   margin: 0.5rem 0; 
-  // flex-wrap: wrap; 
-
 
   &:before {
     display: none;
@@ -41,9 +39,6 @@
   &:hover > .account__payment {
     display: flex;
   }
-  // &:hover > .accounts__indicators {
-  //   display: none;
-  // }
   &:hover > .account__btn > .bundle__icon {
     transition: all .2s linear;
     stroke: $white;
@@ -80,7 +75,6 @@
   align-items: center;
   align-content: center;
   position: relative;
-  // margin-right: 6%;
   width: 105px;
 }
 .account__icon {
@@ -93,7 +87,6 @@
 }
 .account__info {
   display: flex;
-  // margin-left: 2rem;
   width: 34%;
 }
 .account__initials {
@@ -143,10 +136,7 @@
 
 .account__indicator {
   display: flex;
-  // justify-content: center;
   flex-direction: column;
-
-  // margin-right: auto;
   &:last-child {
     margin-right: 0;
   }
@@ -219,8 +209,6 @@
 }
 
 .bundle__icon {
-  // position: absolute;
-  // left: 16%;
   margin-right: 0.4rem;
   z-index: 11;
   stroke: #DB84A4;
@@ -247,159 +235,3 @@
   fill: #CED4DC;
 }
 
-@media (max-width: 920px) {
-  .account__info {
-    width: 30%;
-  }
-  .account__count {
-    width: 65px;
-  }
-  .account__payment {
-    width: 230px;
-    margin: 0;
-  }
-  .account__btn {
-    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
-
-  }
-  // .button__icon {
-  //   margin-left: 0;
-  // }
-}
-
-@media (max-width: 767px) {
-  // .button__icon {
-  //   margin-left: 0;
-  // }
-  .account {
-    flex-wrap: wrap; 
-
-    margin: 1rem 0;
-    background-color: #fff;
-    &:hover > button > .trash__icon {
-      display: none;
-    }
-    border-radius: 10px;
-    padding: 2rem 2rem 1rem;
-    &.new {
-      &:before {
-        display: none;
-      }
-    }
-  }
-  .account__info {
-    width: 100%;
-    margin-bottom: 0.5rem;
-
-  }
-  .account__initials {
-    margin-left: 1rem;
-  }
-  .account__icon {
-    top: 1px;
-  }
-  .account__count {
-    flex-direction: row;
-    width: 100%;
-    margin-left: 5.3rem;
-    margin-bottom: 1rem;
-  }
-  .account__payment {
-    margin: 0  auto;
-  }
-  .account__btn {
-    width: 100%;
-    justify-content: center;
-    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
-  }
-  .account__status {
-    border: 1px #CED4DC solid;
-    border-radius: 5px;
-    padding: 0.7rem;
-    width: 100%;
-    justify-content: center;
-  }
-  .account__text {
-    text-align: center;
-  }
-  .account__payment {
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    margin-top: 0.7rem;
-    color: #A6AEBA;
-    & > p {
-      display: flex;
-    }
-  }
-  .account__date {
-    color: #A6AEBA;
-    flex-direction: row;
-  }
-  .accounts__indicators {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-right: 0;
-
-    &:first-child {
-      margin-right: 0;
-    }
-  }
-  .account__indicator {
-    background-color: #FBFBFD;
-    border-radius: 10px;
-    padding: 0.5rem;
-  }
-  .indicator {
-    margin: 0 auto;
-    width: 38px;
-    height: 38px;
-    & > p {
-      font-size: 0.8rem;
-    }
-  }
-  // .account__btn {
-  //   padding: 0.7rem 1rem 0.7rem 2rem;
-  // }
-  .account__status--text {
-    text-align: center;
-    margin-left: 0rem;
-    font-size: 0.9rem;
-  }
-  .clock__icon {
-    margin-right: 0.5rem;
-  }
-} 
-
-@media (max-width: 285px) {
-  .account {
-    padding: 0.5rem;
-  }
-  .account__info {
-    flex-direction: column;
-    text-align: center;
-  }
-  .account__btn {
-    padding: 0.7rem 1rem;
-  }
-  .account__initials {
-    margin-left: 0;
-  }
-  .account__img {
-    margin: 0 auto;
-  }
-  .account__count {
-    margin-left: 0;
-    justify-content: center;
-  }
-  .account__icon {
-    position: static;
-    margin-right: 0.5rem;
-  }
-  .accounts__indicators {
-    flex-direction: column;
-  }
-}

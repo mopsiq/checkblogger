@@ -106,6 +106,13 @@ const MainBlock = ({ state, reducerStates, size }) => {
 	);
 };
 
+const PreLoadBlock = ({ loaded, Component, ...rest }) => {
+	if (loaded) {
+		return <SpinnerPage />;
+	}
+	return <Component {...rest} />;
+};
+
 function Verification() {
 	const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
@@ -163,7 +170,14 @@ function Verification() {
 									: 'verification'
 							}
 						>
-							{state.loaded ? (
+							<PreLoadBlock
+								loaded={state.loaded}
+								Component={MainBlock}
+								state={state}
+								reducerStates={reducerStates}
+								size={isMobile}
+							/>
+							{/* {state.loaded ? (
 								<SpinnerPage />
 							) : (
 								<>
@@ -173,7 +187,7 @@ function Verification() {
 										size={isMobile}
 									/>
 								</>
-							)}
+							)} */}
 							<Pagination
 								className={
 									state.searchCheckHistory.length === 0

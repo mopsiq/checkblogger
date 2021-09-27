@@ -1,6 +1,5 @@
 .main {
   background-color: $white;
-  // width: 1230px;
   height: 92.8vh;
   display: flex;
   flex-wrap: wrap;
@@ -16,8 +15,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-    overflow: hidden;
-  // margin: 0 1rem;
+  overflow: hidden;
 }
 
 .main__title {
@@ -46,8 +44,6 @@
   display: none;
   flex-direction: column;
   z-index: 99;
-  // margin-left: 4%;
-  // margin-right: auto;
   margin-bottom: 3rem;
   width: 100%;
 }
@@ -58,87 +54,3 @@
   z-index: 99;
 }
 
-@media (max-width: 1200px) {
-  .main__title {
-    font-size: 3rem;
-    width: auto;
-  }
-  .main__subtitle {
-    width: auto;
-  }
-}
-
-@media (max-width: 920px) {
-  .main__title {
-    font-size: 2.5rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .main {
-    height: 100vh;
-    align-items: flex-end;
-    align-content: flex-end;
-    background: rgba(219, 132, 164, 0.77);
-    &:before {
-      content: '';
-      width: 100vh;
-      height: 100vh;
-      position: absolute;
-      z-index: 89;
-      background: rgba(219, 132, 164, 0.30);
-    }
-    // background: url('../../assets/img/saly.png') center no-repeat;
-      
-  }
-  .main__container {
-    justify-content: flex-start;
-    align-content: flex-start;
-    align-items: flex-start;
-    z-index: 91;
-    color: $white;
-    margin: 0 1rem;
-  }
-  .main__title {
-    color: $white;
-
-    width: auto;
-    font-size: 2rem;
-    font-weight: 600;
-  }
-  .main__subtitle {
-    color: $white;
-
-    width: auto;
-    text-align: left;
-    font-weight: 400;
-    font-size: 1.3rem;
-  }
-  .main__img {
-    background-color: $brand;
-    position: absolute;
-    right: -280px;
-    bottom: -90px;
-    background: rgba(219, 132, 164, 0.05);
-
-    // margin-left: 25rem;
-    width: 700px;
-  }
-  .main__authbtn {
-    display: flex;
-  }
-}
-
-
-@media (max-width: 360px) {
-  .main__img {
-    width: 600px;
-    right: -240px
-  }
-  .main__title {
-    font-size: 1.5rem;
-  }
-  .main__subtitle {
-    font-size: 1rem;
-  }
-}

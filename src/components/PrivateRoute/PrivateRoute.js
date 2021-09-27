@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useMediaQuery } from 'react-responsive';
-import { Header } from '../Header/Header.js';
 import { Store } from '../../Store.js';
 
 // Переименовать аргумент mode на что-то более подходящее
@@ -11,7 +9,6 @@ const PrivateRoute = ({
 	pathRedirect = '/',
 	...rest
 }) => {
-	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	const [state, dispatch] = useContext(Store);
 	const isLogin = (user) => {
 		return mode ? !user : user;

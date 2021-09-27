@@ -2,7 +2,7 @@
 @import './assets/styles/_reset';
 @import './assets/styles/_mixins';
 @import './assets/styles/_fonts';
-
+@import './assets/styles/_container';
 
 body, html {
   margin: 0;
@@ -45,28 +45,8 @@ button:hover {
 @import './pages/Login/Login.scss';
 // @import './pages/Verification/Verification.scss';
 
+// Media
+@import './assets/styles/_media';
 
-
-.container {
-  width: 100%;
-  max-width: 1230px;
-  padding: 0 15px;
-  margin: 1rem auto 0 auto;
-  overflow: hidden;
-
-  &.main--page {
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .container {
-    padding: 0;
-    margin: 1.5rem 0rem 4rem;
-    // margin: 10rem 0;
-  }
-}
 
 

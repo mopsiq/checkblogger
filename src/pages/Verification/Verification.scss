@@ -4,8 +4,6 @@
   height: auto;
   position: relative;
 
-  // padding: 2rem 2.3rem 0; 
-
   &.active:before {
     visibility: visible;
   }
@@ -40,15 +38,11 @@
 }
 
 .accounts__subtitle {
-  // width: 40%;
-  // margin: 0 3.5%;
   margin-left: 2%;
   &--start {
     width: 28%;
     margin-left: 0;
     margin-right: 2%;
-    // margin-right: auto;
-    // width: 55%;
   }
 }
 
@@ -58,38 +52,4 @@
   font-weight: 500;
 }
 
-@media (max-width: 920px) {
 
-    .verification__body {
-      padding: 0 1rem;
-    }
-
-  .accounts__subtitles {
-    &--verification {
-      width: 50%;
-      justify-content: space-between;
-    }
-    &--report {
-      padding: 1rem 1rem 0;
-      justify-content: center;
-    }
-
-    &--searching {
-      text-align: center;
-      padding: 3rem 0;
-      background-color: $white;
-    }
-    
-  }
-  .accounts__subtitle {
-    &--start {
-      width: auto;
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .verification {
-    background-color: transparent;
-  }
-}

@@ -1,0 +1,310 @@
+@media (max-width: 1200px) {
+  .main__title {
+    font-size: 3rem;
+    width: auto;
+  }
+  .main__subtitle {
+    width: auto;
+  }
+}
+
+@media (max-width: 920px) {
+  // HEADER
+  .nav {
+    width: 90%;
+  }
+  // MAIN
+  .main__title {
+    font-size: 2.5rem;
+  }
+  // ACCOUNT
+  .account__info {
+    width: 30%;
+  }
+  .account__count {
+    width: 65px;
+  }
+  .account__payment {
+    width: 230px;
+    margin: 0;
+  }
+  .account__btn {
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+  }
+  // VERIFICATION
+  .verification__body {
+    padding: 0 1rem;
+  }
+  .accounts__subtitles {
+    &--verification {
+      width: 50%;
+      justify-content: space-between;
+    }
+    &--report {
+      padding: 1rem 1rem 0;
+      justify-content: center;
+    }
+
+    &--searching {
+      text-align: center;
+      padding: 3rem 0;
+      background-color: $white;
+    }
+  }
+  .accounts__subtitle {
+    &--start {
+      width: auto;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding: 0;
+    margin: 1.5rem 0rem 4rem;
+  }
+
+  // HEADER
+  .nav__logo {
+    width: 190px;
+  }
+  .selected {
+    &:before {
+      width: 72px;
+      border-top-right-radius: 0;
+    }
+  }
+
+  // MAIN
+  .main {
+    height: 100vh;
+    align-items: flex-end;
+    align-content: flex-end;
+    background: rgba(219, 132, 164, 0.77);
+    &:before {
+      content: '';
+      width: 100vh;
+      height: 100vh;
+      position: absolute;
+      z-index: 89;
+      background: rgba(219, 132, 164, 0.30);
+    }      
+  }
+  .main__container {
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    z-index: 91;
+    color: $white;
+    margin: 0 1rem;
+  }
+  .main__title {
+    color: $white;
+    width: auto;
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  .main__subtitle {
+    color: $white;
+    width: auto;
+    text-align: left;
+    font-weight: 400;
+    font-size: 1.3rem;
+  }
+  .main__img {
+    background-color: $brand;
+    position: absolute;
+    right: -280px;
+    bottom: -90px;
+    background: rgba(219, 132, 164, 0.05);
+    width: 700px;
+  }
+  .main__authbtn {
+    display: flex;
+  }
+
+  // SEARCHBAR
+  .search {
+    width: 95%;
+    padding: 0;
+    margin: 0rem auto 1rem;
+  }
+  .search__container {
+    border: none;
+  }
+  .search__input {
+    border-radius: 10px;
+    &::placeholder {
+      color: #CED4DC;
+    }
+  }
+  .search__help {
+    margin: 0.5rem auto 0;
+    &:after {
+      top: -50px;
+      left: 0;
+    }
+  }
+  .result__loading {
+    &.page {
+      height: auto;
+    }
+  }
+  // ACCOUNT
+  .account {
+    flex-wrap: wrap; 
+
+    margin: 1rem 0;
+    background-color: #fff;
+    &:hover > button > .trash__icon {
+      display: none;
+    }
+    border-radius: 10px;
+    padding: 2rem 2rem 1rem;
+    &.new {
+      &:before {
+        display: none;
+      }
+    }
+  }
+  .account__info {
+    width: 100%;
+    margin-bottom: 0.5rem;
+
+  }
+  .account__initials {
+    margin-left: 1rem;
+  }
+  .account__icon {
+    top: 1px;
+  }
+  .account__count {
+    flex-direction: row;
+    width: 100%;
+    margin-left: 5.3rem;
+    margin-bottom: 1rem;
+  }
+  .account__payment {
+    margin: 0  auto;
+  }
+  .account__btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+  }
+  .account__status {
+    border: 1px #CED4DC solid;
+    border-radius: 5px;
+    padding: 0.7rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .account__text {
+    text-align: center;
+  }
+  .account__payment {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    margin-top: 0.7rem;
+    color: #A6AEBA;
+    & > p {
+      display: flex;
+    }
+  }
+  .account__date {
+    color: #A6AEBA;
+    flex-direction: row;
+  }
+  .accounts__indicators {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 0;
+
+    &:first-child {
+      margin-right: 0;
+    }
+  }
+  .account__indicator {
+    background-color: #FBFBFD;
+    border-radius: 10px;
+    padding: 0.5rem;
+  }
+  .indicator {
+    margin: 0 auto;
+    width: 38px;
+    height: 38px;
+    & > p {
+      font-size: 0.8rem;
+    }
+  }
+  .account__status--text {
+    text-align: center;
+    margin-left: 0rem;
+    font-size: 0.9rem;
+  }
+  .clock__icon {
+    margin-right: 0.5rem;
+  }
+
+  // VERIFICATION
+  .verification {
+    background-color: transparent;
+  }
+  // REPORT
+  .report {
+    background-color: transparent;
+  }
+}
+
+
+@media (max-width: 360px) {
+  .main__img {
+    width: 600px;
+    right: -240px
+  }
+  .main__title {
+    font-size: 1.5rem;
+  }
+  .main__subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 285px) {
+  // HEADER
+  .nav__logo {
+    width: 180px;
+  }
+  // ACCOUNT
+  .account {
+    padding: 0.5rem;
+  }
+  .account__info {
+    flex-direction: column;
+    text-align: center;
+  }
+  .account__btn {
+    padding: 0.7rem 1rem;
+  }
+  .account__initials {
+    margin-left: 0;
+  }
+  .account__img {
+    margin: 0 auto;
+  }
+  .account__count {
+    margin-left: 0;
+    justify-content: center;
+  }
+  .account__icon {
+    position: static;
+    margin-right: 0.5rem;
+  }
+  .accounts__indicators {
+    flex-direction: column;
+  }
+}

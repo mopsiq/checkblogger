@@ -34,18 +34,6 @@ function App() {
 							pathRedirect='/check'
 							path='/main'
 						/>
-						{/* <Route
-							path='/main'
-							// component={Main}
-							render={(props) => (
-								<>
-									{isMobile && <Header {...props} />}
-									<Main />
-								</>
-							)}
-						/> */}
-						{/* <Route path='/report' component={Report} />
-						<Route path='/check' component={Verification} /> */}
 						<Route path='/login' component={Login} />
 						<PrivateRoute
 							component={Report}

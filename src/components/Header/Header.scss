@@ -4,16 +4,8 @@
   background-color: $white;
 
   &.mobile {
-    // position: fixed;
-    // top: 0;
-    // left: 0;
-    // right: 0;
-    // z-index: 99;
     width: 100%;
     background-color: $brand;
-    // padding: 1rem 0 3.5rem;
-
-    
 
     .nav {
       width: 100%;
@@ -217,34 +209,7 @@
   line-height: 1.5rem;
 }
 
-@media (max-width: 285px) {
-  .nav__logo {
-    width: 180px;
-  }
-}
 
-@media (max-width: 767px) {
-  .nav__logo {
-    width: 190px;
-  }
-  .selected {
-    &:before {
-      width: 72px;
-      border-top-right-radius: 0;
-    }
-  }
-}
-@media (max-width: 920px) {
-  .nav {
-    width: 90%;
-  }
-  // .nav__logo {
-  //   margin-right: 0;
-  // }
-  // .nav__item {
-  //   width: 100%;
-  //   padding: 1.6rem 1rem;
-  //   justify-content: space-between;
-  // }
-}
+
+
 

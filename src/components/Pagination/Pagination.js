@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import { Store } from '../../Store';
-
 import {
 	usePagination,
 	DOTS,
@@ -33,17 +32,6 @@ const Pagination = ({
 				field: 'loaded',
 				payload: true,
 			});
-			// dispatch({
-			// 	type: 'SET_DATA',
-			// 	field: 'searchCheckHistory',
-			// 	payload: '',
-			// });
-			// dispatch({
-			// 	type: 'SET_DATA',
-			// 	field: 'reportUsers',
-			// 	payload: '',
-			// });
-
 			try {
 				const request = await fetch(url);
 				if (request.status !== 200) {
@@ -58,11 +46,6 @@ const Pagination = ({
 						: (count += 0)
 				);
 				console.log(requestJSON);
-				// dispatch({
-				// 	type: 'SET_DATA',
-				// 	field: 'username',
-				// 	payload: requestJSON.username,
-				// });
 				dispatch({
 					type: 'SET_DATA',
 					field: 'notViewedReports',

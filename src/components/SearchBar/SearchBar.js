@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
+import { User } from '../../components/User/User.js';
 import {
-	User,
 	SearchBarField,
 	PendingReport,
 	ReportUserField,
-} from '../../components/User/User.js';
+} from '../User/UserTypesFields/UserTypesFields';
 import spinner from '../../assets/img/spinner.gif';
 import '../../index.scss';
 
@@ -156,7 +156,6 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 			setFocus('');
 			setValue('');
 		}, 150);
-
 		enableBodyScroll(document.body, {
 			reserveScrollBarGap: false,
 		});

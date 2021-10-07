@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useContext } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
-import { User, CheckUserField } from '../../components/User/User.js';
+import { User } from '../../components/User/User.js';
+import { CheckUserField } from '../../components/User/UserTypesFields/UserTypesFields.js';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { useFetch } from '../../hooks/useFetch/useFetch.js';
 import { Pagination } from '../../components/Pagination/Pagination.js';
@@ -177,17 +178,6 @@ function Verification() {
 								reducerStates={reducerStates}
 								size={isMobile}
 							/>
-							{/* {state.loaded ? (
-								<SpinnerPage />
-							) : (
-								<>
-									<MainBlock
-										state={state}
-										reducerStates={reducerStates}
-										size={isMobile}
-									/>
-								</>
-							)} */}
 							<Pagination
 								className={
 									state.searchCheckHistory.length === 0

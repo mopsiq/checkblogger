@@ -17,7 +17,6 @@ const UserMenu = ({ username }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const root = useRef();
 
-	// Сократить обнуление стора до одного вызова
 	const buttonsExit = () => {
 		setIsOpen(false);
 		dispatch({
@@ -181,11 +180,34 @@ const MobileHeader = ({ state }) => {
 	);
 };
 
+const NavLinks = ({ state }) => {
+	return (
+		<>
+			<li className='nav__link'>
+				<NavLink to='/check' activeClassName='selected'>
+					Проверка
+				</NavLink>
+			</li>
+			<li className='nav__link'>
+				<NavLink to='/report' activeClassName='selected'>
+					Отчеты
+					{state.notViewedReports > 0 && (
+						<span className='report__count'>
+							{state.notViewedReports > 9
+								? '9+'
+								: state.notViewedReports}
+						</span>
+					)}
+				</NavLink>
+			</li>
+		</>
+	);
+};
+
 function Header() {
 	const [state, dispatch] = useContext(Store);
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 
-	// Вынести nav в отдельный компонент
 	return (
 		<>
 			<div className={isMobile ? 'header' : 'header mobile'}>
@@ -199,33 +221,7 @@ function Header() {
 							</li>
 						</ul>
 						<ul className='nav__item'>
-							{state.username && (
-								<>
-									<li className='nav__link'>
-										<NavLink
-											to='/check'
-											activeClassName='selected'
-										>
-											Проверка
-										</NavLink>
-									</li>
-									<li className='nav__link'>
-										<NavLink
-											to='/report'
-											activeClassName='selected'
-										>
-											Отчеты
-											{state.notViewedReports > 0 && (
-												<span className='report__count'>
-													{state.notViewedReports > 9
-														? '9+'
-														: state.notViewedReports}
-												</span>
-											)}
-										</NavLink>
-									</li>
-								</>
-							)}
+							{state.username && <NavLinks state={state} />}
 						</ul>
 						<ul
 							className={

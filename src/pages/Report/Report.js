@@ -1,11 +1,11 @@
 import React, { useState, useContext, useMemo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
+import { User } from '../../components/User/User.js';
 import {
-	User,
 	ReportUserField,
 	PendingReport,
-} from '../../components/User/User.js';
+} from '../../components/User/UserTypesFields/UserTypesFields.js';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { Pagination } from '../../components/Pagination/Pagination.js';
 import { Store } from '../../Store';

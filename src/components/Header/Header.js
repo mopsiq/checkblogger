@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from 'react';
+import React, { useRef, useEffect, useState, useContext, memo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
 import { useFetch } from '../../hooks/useFetch/useFetch.js';
@@ -157,22 +157,10 @@ const MobileHeader = ({ state }) => {
 
 				{getCurrentPath(currentLoc.pathname) && (
 					<SearchBar
-						stateFields={reducerStates.localStates}
-						setValue={(e) =>
-							reducerStates.dispatch({
-								type: 'HANDLE_INPUT',
-								field: 'value',
-								payload: e,
-							})
-						}
-						setFocus={(e) =>
-							reducerStates.dispatch({
-								type: 'BOOLEAN_CHANGE',
-								field: 'activeFocus',
-								payload: e,
-							})
-						}
-						data={reducerStates.localStates.data}
+						requestName={locationPathURLS[currentLoc.pathname]}
+						// stateFields={reducerStates.localStates}
+						// data={reducerStates.localStates.data}
+						// reducer={reducerStates}
 					/>
 				)}
 			</nav>
@@ -204,7 +192,7 @@ const NavLinks = ({ state }) => {
 	);
 };
 
-function Header() {
+const Header = memo(() => {
 	const [state, dispatch] = useContext(Store);
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 
@@ -243,6 +231,7 @@ function Header() {
 			</div>
 		</>
 	);
-}
+	// }
+});
 
 export { Header };

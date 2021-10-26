@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, memo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg';
 import { User } from '../../components/User/User.js';
+import { useSearchBarReducer } from '../../hooks/useSearchBarReducer/useSearchBarReducer.js';
+import { useFetch } from '../../hooks/useFetch/useFetch.js';
 import {
 	SearchBarField,
 	PendingReport,
@@ -122,15 +124,20 @@ const ResultSearch = ({ info, loader, focus, error }) => {
 	);
 };
 
-function SearchBar({ stateFields, setValue, setFocus, data }) {
+const SearchBar = memo(({ requestName, stateFields, data, reducer }) => {
+	// function SearchBar({ stateFields, setValue, setFocus, data }) {
 	const root = useRef();
+	const reducerStates = useSearchBarReducer();
+	const localFetch = useFetch(requestName, reducerStates);
+
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
+	// console.log('SearchBar rendering');
 
 	useEffect(() => {
 		const checkingRoot = (e) => {
 			if (root.current) {
 				root.current.contains(e.target) ||
-					(stateFields.value &&
+					(reducerStates.localStates.value &&
 						enableBodyScroll(document.body, {
 							reserveScrollBarGap: false,
 						}));
@@ -143,30 +150,56 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 		return () => {
 			document.removeEventListener('click', checkingRoot);
 		};
-	}, [setValue, setFocus, stateFields.value]);
+	}, [reducerStates.localStates.value]);
+
+	const setOnValue = useCallback((e) => {
+		reducerStates.dispatch({
+			type: 'HANDLE_INPUT',
+			field: 'value',
+			payload: e,
+		});
+	}, []);
+
+	const setOnFocus = useCallback((e) => {
+		reducerStates.dispatch({
+			type: 'BOOLEAN_CHANGE',
+			field: 'activeFocus',
+			payload: e,
+		});
+	}, []);
 
 	const changeInFocus = (e) => {
-		setFocus(true);
+		setOnFocus(true);
+
 		disableBodyScroll(document.body, { reserveScrollBarGap: true });
 	};
 
 	const changeInBlur = (e) => {
 		e.preventDefault();
 		setTimeout(() => {
-			setFocus('');
-			setValue('');
+			setOnFocus('');
+			setOnValue('');
 		}, 150);
 		enableBodyScroll(document.body, {
 			reserveScrollBarGap: false,
 		});
 	};
+
+	const changeInValue = (e) => {
+		setOnValue(e.target.value);
+	};
+
 	return (
 		<>
-			<form className={stateFields.value ? 'search active' : 'search'}>
+			<form
+				className={
+					reducerStates.localStates.value ? 'search active' : 'search'
+				}
+			>
 				<div
 					ref={root}
 					className={
-						stateFields.value && !isMobile
+						reducerStates.localStates.value && !isMobile
 							? 'search__container active'
 							: 'search__container'
 					}
@@ -180,23 +213,23 @@ function SearchBar({ stateFields, setValue, setFocus, data }) {
 								: 'Поиск аккаунта'
 						}
 						className='search__input'
-						value={stateFields.value}
-						onChange={(e) => setValue(e.target.value)}
+						value={reducerStates.localStates.value}
+						onChange={(e) => changeInValue(e)}
 						onFocus={(e) => changeInFocus(e)}
 						onBlur={(e) => changeInBlur(e)}
 					/>
 				</div>
-				{stateFields.value ? (
+				{reducerStates.localStates.value ? (
 					<ResultSearch
-						info={data}
-						loader={stateFields.isLoaded}
-						focus={stateFields.activeFocus}
-						error={stateFields.isError}
+						info={reducerStates.localStates.data}
+						loader={reducerStates.localStates.isLoaded}
+						focus={reducerStates.localStates.activeFocus}
+						error={reducerStates.localStates.isError}
 					/>
 				) : null}
 			</form>
 		</>
 	);
-}
-
+	// }
+});
 export { SearchBar };

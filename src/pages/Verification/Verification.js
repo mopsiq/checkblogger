@@ -38,7 +38,7 @@ const InstagramAccounts = ({ statusField, data }) => {
 			{data.slice(0, 10).map((item, index) => (
 				<li key={item.id}>
 					<User
-						statusField={statusField}
+						// statusField={statusField}
 						avatar={item['avatar_url']}
 						realname={item['real_name']}
 						username={item.username}
@@ -94,9 +94,9 @@ const MainBlock = ({ state, reducerStates, size }) => {
 					<div className='verification__body'>
 						<>
 							<InstagramAccounts
-								statusField={
-									reducerStates.localStates.activeFocus
-								}
+								// statusField={
+								// 	reducerStates.localStates.activeFocus
+								// }
 								data={state.searchCheckHistory}
 							/>
 						</>
@@ -144,32 +144,34 @@ function Verification() {
 					<div className='container'>
 						{isMobile && (
 							<SearchBar
-								stateFields={reducerStates.localStates}
-								setValue={(e) =>
-									reducerStates.dispatch({
-										type: 'HANDLE_INPUT',
-										field: 'value',
-										payload: e,
-									})
-								}
-								setFocus={(e) =>
-									reducerStates.dispatch({
-										type: 'BOOLEAN_CHANGE',
-										field: 'activeFocus',
-										payload: e,
-									})
-								}
-								data={reducerStates.localStates.data}
+								requestName='steam'
+								// stateFields={reducerStates.localStates}
+								// setValue={(e) =>
+								// 	reducerStates.dispatch({
+								// 		type: 'HANDLE_INPUT',
+								// 		field: 'value',
+								// 		payload: e,
+								// 	})
+								// }
+								// setFocus={(e) =>
+								// 	reducerStates.dispatch({
+								// 		type: 'BOOLEAN_CHANGE',
+								// 		field: 'activeFocus',
+								// 		payload: e,
+								// 	})
+								// }
+								// data={reducerStates.localStates.data}
 							/>
 						)}
 
 						<div
-							className={
-								reducerStates.localStates.activeFocus ||
-								reducerStates.localStates.value
-									? 'verification active'
-									: 'verification'
-							}
+							className='verification'
+							// className={
+							// 	reducerStates.localStates.activeFocus ||
+							// 	reducerStates.localStates.value
+							// 		? 'verification active'
+							// 		: 'verification'
+							// }
 						>
 							<PreLoadBlock
 								loaded={state.loaded}

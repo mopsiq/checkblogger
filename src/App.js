@@ -21,7 +21,7 @@ function App() {
 
 	return (
 		<Router>
-			<div>
+			<div className='block'>
 				<StoreProvider>
 					<Header />
 					<Switch>

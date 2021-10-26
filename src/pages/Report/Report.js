@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo, useCallback, memo } from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { SearchBar } from '../../components/SearchBar/SearchBar.js';
 import { User } from '../../components/User/User.js';
@@ -57,7 +57,8 @@ const SpinnerPage = () => {
 	);
 };
 
-const MainBlock = ({ state, reducerStates, size }) => {
+const MainBlock = memo(({ state, reducerStates, size }) => {
+	// const MainBlock = ({ state, reducerStates, size }) => {
 	return (
 		<>
 			{state.reportUsersLength === 0 || state.reportUsers.length === 0 ? (
@@ -77,9 +78,9 @@ const MainBlock = ({ state, reducerStates, size }) => {
 					<div className='verification__body'>
 						<>
 							<InstagramAccounts
-								statusField={
-									reducerStates.localStates.activeFocus
-								}
+								// statusField={
+								// 	reducerStates.localStates.activeFocus
+								// }
 								data={state.reportUsers}
 							/>
 						</>
@@ -88,7 +89,8 @@ const MainBlock = ({ state, reducerStates, size }) => {
 			)}
 		</>
 	);
-};
+	// };
+});
 
 const InstagramAccounts = ({ statusField, data }) => {
 	return (
@@ -96,7 +98,7 @@ const InstagramAccounts = ({ statusField, data }) => {
 			{data.slice(0, 10).map((item, index) => (
 				<li key={item.id}>
 					<User
-						statusField={statusField}
+						// statusField={statusField}
 						avatar={item['avatar_url']}
 						realname={item['real_name']}
 						username={item.username}
@@ -123,7 +125,7 @@ const InstagramAccounts = ({ statusField, data }) => {
 };
 
 function Report() {
-	const reducerStates = useSearchBarReducer();
+	// const reducerStates = useSearchBarReducer();
 	const [state, dispatch] = useContext(Store);
 	const isMobile = useMediaQuery({ query: '(min-width: 767px )' });
 	let PageSize = 10;
@@ -136,7 +138,8 @@ function Report() {
 		return state.reportUsersLength;
 	}, [currentPage]);
 
-	const localFetch = useFetch('bd', reducerStates);
+	// const localFetch = useFetch('bd', reducerStates);
+	// console.log('Report re-render');
 
 	return (
 		<>
@@ -151,39 +154,28 @@ function Report() {
 					<div className='container'>
 						{isMobile && (
 							<SearchBar
-								stateFields={reducerStates.localStates}
-								setValue={(e) =>
-									reducerStates.dispatch({
-										type: 'HANDLE_INPUT',
-										field: 'value',
-										payload: e,
-									})
-								}
-								setFocus={(e) =>
-									reducerStates.dispatch({
-										type: 'BOOLEAN_CHANGE',
-										field: 'activeFocus',
-										payload: e,
-									})
-								}
-								data={reducerStates.localStates.data}
+								requestName='bd'
+								// stateFields={reducerStates.localStates}
+								// data={reducerStates.localStates.data}
+								// reducer={reducerStates}
 							/>
 						)}
 
 						<div
-							className={
-								reducerStates.localStates.activeFocus ||
-								reducerStates.localStates.value
-									? 'report active'
-									: 'report'
-							}
+							// className={
+							// 	reducerStates.localStates.activeFocus ||
+							// 	reducerStates.localStates.value
+							// 		? 'report active'
+							// 		: 'report'
+							// }
+							className='report'
 						>
 							{state.reportUsers.length === 0 || state.loaded ? (
 								<SpinnerPage />
 							) : (
 								<MainBlock
 									state={state}
-									reducerStates={reducerStates}
+									// reducerStates={reducerStates}
 									size={isMobile}
 								/>
 							)}

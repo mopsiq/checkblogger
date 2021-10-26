@@ -95,43 +95,49 @@ const UserButtonsField = ({ typeButton, textButton, icon, onClickFunc }) => {
 	);
 };
 
-const User = ({
-	activeFocus,
-	avatar,
-	realname,
-	username,
-	followers,
-	children,
-	downloaded,
-	payment,
-}) => {
-	return (
-		<div
-			className={
-				!downloaded && payment !== 'false' ? 'account new' : 'account'
-			}
-		>
-			<div className='account__info'>
-				<img
-					className={
-						activeFocus ? 'account__img active' : 'account__img'
-					}
-					alt='profile'
-					src={avatar}
-				></img>
-				<div className='account__initials'>
-					<div className='account__name'>{realname}</div>
-					<div className='account__url'>@{username}</div>
+const User = React.memo(
+	({
+		// activeFocus,
+		avatar,
+		realname,
+		username,
+		followers,
+		children,
+		downloaded,
+		payment,
+	}) => {
+		// console.log('User render');
+		return (
+			<div
+				className={
+					!downloaded && payment !== 'false'
+						? 'account new'
+						: 'account'
+				}
+			>
+				<div className='account__info'>
+					<img
+						// className={
+						// 	activeFocus ? 'account__img active' : 'account__img'
+						// }
+						className={'account__img'}
+						alt='profile'
+						src={avatar}
+					></img>
+					<div className='account__initials'>
+						<div className='account__name'>{realname}</div>
+						<div className='account__url'>@{username}</div>
+					</div>
 				</div>
+				<div className='account__count'>
+					<PeopleIcon className='account__icon' />
+					<span>{delimiterString(followers ? followers : '0')}</span>
+				</div>
+				{children}
 			</div>
-			<div className='account__count'>
-				<PeopleIcon className='account__icon' />
-				<span>{delimiterString(followers ? followers : '0')}</span>
-			</div>
-			{children}
-		</div>
-	);
-};
+		);
+	}
+);
 
 export {
 	User,

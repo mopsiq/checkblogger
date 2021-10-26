@@ -27,6 +27,18 @@ button:hover {
 
 
 
+.block > .container > .search:focus-within + .report  {
+  &:before {
+    visibility: visible
+  }
+}
+
+.block > .container > .search:focus-within + .verification  {
+  &:before {
+    visibility: visible
+  }
+}
+
 
 // Components
 @import './components/Pagination/Pagination.scss';
@@ -47,6 +59,5 @@ button:hover {
 
 // Media
 @import './assets/styles/_media';
-
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import './UserProfile.scss';
 import { Store } from '../../Store';
+import './UserProfile.scss';
 
 function UserProfile() {
 	const [state, dispatch] = useContext(Store);
